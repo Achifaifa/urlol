@@ -3,6 +3,34 @@ step=0
 beat=0
 starttime=Date.now()
 
+sup={
+  "a":"\u1D43",
+  "b":"\u1D47",
+  "c":"\u1D9C",
+  "d":"\u1D48",
+  "e":"\u1D49",
+  "f":"\u1DA0",
+  "g":"\u1D4D",
+  "h":"\u02B0",
+  "i":"\u2071",
+  "j":"\u02B2",
+  "k":"\u1D4F",
+  "l":"\u02E1",
+  "m":"\u1D50",
+  "n":"\u207F",
+  "o":"\u1D52",
+  "p":"\u1D56",
+  "r":"\u02B3",
+  "s":"\u02E2",
+  "t":"\u1D57",
+  "u":"\u1D58",
+  "v":"\u1D5B",
+  "w":"\u02B7",
+  "x":"\u02E3",
+  "y":"\u02B8",
+  "z":"\u1DBB",
+}
+
 function updateclock(){
 
   deltat=Date.now()-starttime
@@ -20,9 +48,27 @@ function repeat(pattern, count) {
   return result + pattern;
 }
 
+frames = [
+  '(\\\u00B0-\u00B0)\\ \u252C\u2500\u252C',
+  '(\\\u00B0\u25A1\u00B0)\\  \u252C\u2500\u252C',
+  '(-\u00B0\u25A1\u00B0)-  \u252C\u2500\u252C',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     L ]',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LO \u253B\u2501\u253B',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADI [',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADIN \u252C\u2500\u252C',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.. ]',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING... \u253B\u2501\u253B',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....L [',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....LO \u252C\u2500\u252C',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....LOADI ]',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....LOADIN \u253B\u2501\u253B',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....LOADING.. [',
+  '(\u256F\u00B0\u25A1\u00B0)\u256F     LOADING.....LOADING... \u252C\u2500\u252C',
+]
+
 function loading(){
 
-  ;
+  return frames[Math.floor(step/10)%15]
 }
 
 function startrail(){
@@ -52,7 +98,14 @@ function snake(){
 
 function scroll(){
 
-  ;
+  len=40-(Math.floor(step/3))
+  string=""
+  for (i=0; i<40; i++){
+    if (i<len){string=string+" "}
+    else {string=string+text[i-len]}
+  }
+  string=string.replace(/undefined/g, '')
+  return string
 }
 
 function sinescroll(text){
@@ -115,7 +168,9 @@ function main(){
   updateclock()
 
   //// TEST ZONE
-  str=sinescroll("TEST")
+  //str=scroll("test")
+  //str=sinescroll("test")
+  str=loading()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
@@ -123,7 +178,6 @@ function main(){
     ;
   }
 
-  console.log(str)
   window.location.replace('# '+str)
 }
 
