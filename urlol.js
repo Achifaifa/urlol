@@ -48,7 +48,7 @@ function repeat(pattern, count) {
   return result + pattern;
 }
 
-frames = [
+loadingframes = [
   '(\\\u00B0-\u00B0)\\ \u252C\u2500\u252C',
   '(\\\u00B0\u25A1\u00B0)\\  \u252C\u2500\u252C',
   '(-\u00B0\u25A1\u00B0)-  \u252C\u2500\u252C',
@@ -65,10 +65,9 @@ frames = [
   '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G     [',
   '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G      \u252C\u2500\u252C',
 ]
-
 function loading(){
 
-  return frames[Math.floor(step/10)%15]
+  return loadingframes[Math.floor(step/10)%15]
 }
 
 function startrail(){
@@ -127,7 +126,7 @@ function invaders(){
 
 function dunnolol(){
 
-  ;
+  return "         \u00AF\\_(\u30C4)_/\u00AF"
 }
 
 function gelogo(){
