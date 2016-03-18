@@ -119,9 +119,15 @@ function sinescroll(text){
   return string
 }
 
+// DJ Ash will like this ;)
+invadertypes=[
+["\uD83D\uDC7E","\uD83D\uDC7E","\uD83D\uDC7E"],
+["\uD83D\uDC7D","\uD83D\uDC7D","\uD83D\uDC7D"],
+["\uD83D\uDC7B","\uD83D\uDC7B","\uD83D\uDC7B"]]
+
 function invaders(){
 
-  ;
+  return scroll(invadertypes[beat%3])
 }
 
 function dunnolol(){
@@ -151,7 +157,7 @@ function equalizer(){
 
 function train(){
 
-  return scroll("\uD83D\uDE84\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D")
+  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",])
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -171,7 +177,8 @@ function main(){
   //str=sinescroll("test")
   //str=loading()
   //str=dunnolol()
-  str=train()
+  //str=train()
+  str=invaders()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
