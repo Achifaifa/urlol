@@ -98,9 +98,9 @@ function snake(){
 
 function scroll(text){
 
-  len=40-(Math.floor(step/3))
+  len=width-(Math.floor(step/3))
   string=""
-  for (i=0; i<40; i++){
+  for (i=0; i<width; i++){
     if (i<len){string=string+" "}
     else {string=string+text[i-len]}
   }
@@ -110,9 +110,9 @@ function scroll(text){
 
 function sinescroll(text){
 
-  len=40-(Math.floor(step/3))
+  len=width-(Math.floor(step/3))
   string=""
-  for (i=0; i<40; i++){
+  for (i=0; i<width; i++){
     if (i<len){string=string+" "}
     else {string=string+text[i-len]}
   }
@@ -138,10 +138,10 @@ function dunnolol(){
 
 function gelogo(){
 
-  //25
-  marg=(width-25)*2
+  logomsg="\uD83D\uDE4C\uD83D\uDE4C\uD83D\uDE4C Gipuzkoa Encounter 10"
+  marg=(width-logomsg.length)*2
   stp=Math.abs((step%marg)-marg/2)
-  return repeat(" ",stp)+"[\uD83D\uDC41] Gipuzkoa Encounter 10"
+  return repeat(" ",stp)+logomsg
 }
 
 function kitt(){
