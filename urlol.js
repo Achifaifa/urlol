@@ -2,6 +2,7 @@
 step=0
 beat=0
 starttime=Date.now()
+width=60
 
 sup={
   "a":"\u1D43",
@@ -137,7 +138,10 @@ function dunnolol(){
 
 function gelogo(){
 
-  ;
+  //25
+  marg=(width-25)*2
+  stp=Math.abs((step%marg)-marg/2)
+  return repeat(" ",stp)+"[\uD83D\uDC41] Gipuzkoa Encounter 10"
 }
 
 function kitt(){
@@ -178,7 +182,8 @@ function main(){
   //str=loading()
   //str=dunnolol()
   //str=train()
-  str=invaders()
+  //str=invaders()
+  str=gelogo()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
@@ -186,7 +191,8 @@ function main(){
     ;
   }
 
-  window.location.replace('# '+str)
+  str=str+repeat(" ",width-str.length)+"|"
+  window.location.replace('# |'+str)
 }
 
 function start(){
