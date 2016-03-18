@@ -95,7 +95,7 @@ function snake(){
   ;
 }
 
-function scroll(){
+function scroll(text){
 
   len=40-(Math.floor(step/3))
   string=""
@@ -151,7 +151,7 @@ function equalizer(){
 
 function train(){
 
-  ;
+  return scroll("\uD83D\uDE84\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D\uD83D\uDE9D")
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -169,7 +169,9 @@ function main(){
   //// TEST ZONE
   //str=scroll("test")
   //str=sinescroll("test")
-  str=loading()
+  //str=loading()
+  //str=dunnolol()
+  str=train()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
