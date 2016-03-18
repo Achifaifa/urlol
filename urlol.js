@@ -118,8 +118,10 @@ function sinescroll(text){
       if (i%3==0) {tempadd=text[i-len].toUpperCase()}
       if (i%3==1) {tempadd=text[i-len]}
       if (i%3==2) {tempadd=sup[text[i-len]]}
+      if (typeof tempadd=="undefined"){tempadd=text[i-len]}
       string=string+tempadd
     }
+
   }
   //string=string.replace(/undefined/g, '')
   return string
@@ -184,7 +186,7 @@ function main(){
 
   //// TEST ZONE
   //str=scroll("test")
-  str=sinescroll("test")
+  str=sinescroll("test\uD83D\uDC7E")
   //str=loading()
   //str=dunnolol()
   //str=train()
