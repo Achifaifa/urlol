@@ -110,13 +110,18 @@ function scroll(text){
 
 function sinescroll(text){
 
-  len=width-(Math.floor(step/3))
+  len=width-(Math.floor(step/5))
   string=""
   for (i=0; i<width; i++){
     if (i<len){string=string+" "}
-    else {string=string+text[i-len]}
+    else if (typeof text[i-len] != 'undefined') {
+      if (i%3==0) {tempadd=text[i-len].toUpperCase()}
+      if (i%3==1) {tempadd=text[i-len]}
+      if (i%3==2) {tempadd=sup[text[i-len]]}
+      string=string+tempadd
+    }
   }
-  string=string.replace(/undefined/g, '')
+  //string=string.replace(/undefined/g, '')
   return string
 }
 
@@ -124,11 +129,12 @@ function sinescroll(text){
 invadertypes=[
 ["\uD83D\uDC7E","\uD83D\uDC7E","\uD83D\uDC7E"],
 ["\uD83D\uDC7D","\uD83D\uDC7D","\uD83D\uDC7D"],
-["\uD83D\uDC7B","\uD83D\uDC7B","\uD83D\uDC7B"]]
+["\uD83D\uDC7B","\uD83D\uDC7B","\uD83D\uDC7B"],
+["\uD83D\uDC80","\uD83D\uDC80","\uD83D\uDC80"]]
 
 function invaders(){
 
-  return scroll(invadertypes[beat%3])
+  return scroll(invadertypes[beat%4])
 }
 
 function dunnolol(){
@@ -178,12 +184,12 @@ function main(){
 
   //// TEST ZONE
   //str=scroll("test")
-  //str=sinescroll("test")
+  str=sinescroll("test")
   //str=loading()
   //str=dunnolol()
   //str=train()
   //str=invaders()
-  str=gelogo()
+  //str=gelogo()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
