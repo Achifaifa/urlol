@@ -23,21 +23,21 @@ function repeat(pattern, count) {
 }
 
 loadingframes = [
-  '(\\\u00B0-\u00B0)\\ \u252C\u2500\u252C',
-  '(\\\u00B0\u25A1\u00B0)\\  \u252C\u2500\u252C',
-  '(-\u00B0\u25A1\u00B0)-  \u252C\u2500\u252C',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L ]',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L  \u253B\u2501\u253B',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A [',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A  \u252C\u2500\u252C',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E ]',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E  \u253B\u2501\u253B',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I [',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I  \u252C\u2500\u252C',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G ]',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G  \u253B\u2501\u253B',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G     [',
-  '(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G      \u252C\u2500\u252C',
+'(\\\u00B0-\u00B0)\\ \u252C\u2500\u252C',
+'(\\\u00B0\u25A1\u00B0)\\  \u252C\u2500\u252C',
+'(-\u00B0\u25A1\u00B0)-  \u252C\u2500\u252C',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L ]',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L  \u253B\u2501\u253B',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A [',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A  \u252C\u2500\u252C',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E ]',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E  \u253B\u2501\u253B',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I [',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I  \u252C\u2500\u252C',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G ]',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G  \u253B\u2501\u253B',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G     [',
+'(\u256F\u00B0\u25A1\u00B0)\u256F     L O A D E R I N G      \u252C\u2500\u252C',
 ]
 
 function loading(){
@@ -50,44 +50,18 @@ function startrail(){
   ;
 }
 
-greeted=[
-"BLWARGH",
-"WEARGHH",
-"BLWORPS",
-"ZWALGRS",
-"HWALPRZ"
-]
-
-blocksv=[
-"\u2581",
-"\u2582",
-"\u2583",
-"\u2584",
-"\u2585",
-"\u2586",
-"\u2587",
-"\u2588",
-]
-
-blocksh=[
-"\u2588",
-"\u2589",
-"\u258A",
-"\u258B",
-"\u258C",
-"\u258D",
-"\u258E",
-"\u258F"
-]
+greeted=["BLWARGH","WEARGHH","BLWORPS","ZWALGRS","HWALPRZ"]
+blocksv=["\u2581","\u2582","\u2583","\u2584","\u2585","\u2586","\u2587","\u2588"]
+blocksh=["\u2588","\u2589","\u258A","\u258B","\u258C","\u258D","\u258E","\u258F"]
 
 function greets(){
 
-  cursgreet=Math.floor(step/100)
-  cursstep=step%100
+  cursgreet=Math.floor(step/150)
+  cursstep=step%150
 
   if (cursgreet<greeted.length) {
     if      (cursstep<20) {string=repeat(blocksh[Math.floor(cursstep/2.9)],width)}
-    else if (cursstep>80) {string=repeat(blocksv[Math.floor((cursstep-80)/2.9)],width)}
+    else if (cursstep>130) {string=repeat(blocksv[Math.floor((cursstep-130)/2.9)],width)}
     else {string=bouncescroll(greeted[cursgreet])}
   }
 
@@ -125,42 +99,37 @@ function scroll(text){
 
 function bouncescroll(text){
 
-  len=Math.floor((Math.sin(step/30)*(width-text.length)/2)+((width-text.length)/2))
-  string=""
-  for (i=0; i<width; i++){
-    if (i<len){string=string+" "}
-    else {string=string+text[i-len]}
-  }
-  string=string.replace(/undefined/g, '')
-  return string
+  marg=(width-text.length)*2
+  stp=Math.abs((step%marg)-marg/2)
+  return repeat(" ",stp)+text
 }
 
 sup={
-  "a":"\u1D43",
-  "b":"\u1D47",
-  "c":"\u1D9C",
-  "d":"\u1D48",
-  "e":"\u1D49",
-  "f":"\u1DA0",
-  "g":"\u1D4D",
-  "h":"\u02B0",
-  "i":"\u2071",
-  "j":"\u02B2",
-  "k":"\u1D4F",
-  "l":"\u02E1",
-  "m":"\u1D50",
-  "n":"\u207F",
-  "o":"\u1D52",
-  "p":"\u1D56",
-  "r":"\u02B3",
-  "s":"\u02E2",
-  "t":"\u1D57",
-  "u":"\u1D58",
-  "v":"\u1D5B",
-  "w":"\u02B7",
-  "x":"\u02E3",
-  "y":"\u02B8",
-  "z":"\u1DBB",
+"a":"\u1D43",
+"b":"\u1D47",
+"c":"\u1D9C",
+"d":"\u1D48",
+"e":"\u1D49",
+"f":"\u1DA0",
+"g":"\u1D4D",
+"h":"\u02B0",
+"i":"\u2071",
+"j":"\u02B2",
+"k":"\u1D4F",
+"l":"\u02E1",
+"m":"\u1D50",
+"n":"\u207F",
+"o":"\u1D52",
+"p":"\u1D56",
+"r":"\u02B3",
+"s":"\u02E2",
+"t":"\u1D57",
+"u":"\u1D58",
+"v":"\u1D5B",
+"w":"\u02B7",
+"x":"\u02E3",
+"y":"\u02B8",
+"z":"\u1DBB",
 }
 
 function sinescroll(text){
@@ -199,11 +168,8 @@ function dunnolol(){
 }
 
 function gelogo(){
-
-  logomsg="\uD83D\uDE4C\uD83D\uDE4C\uD83D\uDE4C Gipuzkoa Encounter 10"
-  marg=(width-logomsg.length)*2
-  stp=Math.abs((step%marg)-marg/2)
-  return repeat(" ",stp)+logomsg
+  
+  return bouncescroll("\uD83D\uDE4C\uD83D\uDE4C\uD83D\uDE4C Gipuzkoa Encounter 10")
 }
 
 function kitt(){
@@ -247,7 +213,7 @@ function main(){
   //str=invaders()
   //str=gelogo()
   str=greets()
-  // str=bouncescroll("BLABLA")
+  //str=bouncescroll("BLABLA")
 
   //// SUPER SERIOUS ZONE
   if (test==0){
