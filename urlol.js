@@ -13,13 +13,13 @@ function updateclock(){
 
 function repeat(pattern, count) {
 
-  if (count < 1) return '';
-  var result = '';
-  while (count > 1) {
-    if (count & 1) result += pattern;
-    count >>= 1, pattern += pattern;
+  if (count<1) return '';
+  var result='';
+  while (count>1){
+    if (count&1) result+=pattern;
+    count>>=1, pattern+=pattern;
   }
-  return result + pattern;
+  return result+pattern;
 }
 
 loadingframes = [
@@ -42,6 +42,7 @@ loadingframes = [
 
 function loading(){
 
+  document.title="plz wait..."
   return loadingframes[Math.floor(step/10)%15]
 }
 
@@ -59,14 +60,13 @@ function greets(){
   cursgreet=Math.floor(step/150)
   cursstep=step%150
 
+  document.title="greets to: "
+  string=""
   if (cursgreet<greeted.length) {
     if      (cursstep<20) {string=repeat(blocksh[Math.floor(cursstep/2.9)],width)}
     else if (cursstep>130) {string=repeat(blocksv[Math.floor((cursstep-130)/2.9)],width)}
     else {string=bouncescroll(greeted[cursgreet])}
   }
-
-  else {string=""}
-
   return string
 }
 
@@ -159,17 +159,17 @@ invadertypes=[
 
 function invaders(){
 
-  return scroll(invadertypes[beat%4])
+  return bouncescroll(invadertypes[beat%4])
 }
 
 function dunnolol(){
 
-  return "         \u00AF\\_(\u30C4)_/\u00AF"
+  return repeat(" ",Math.floor((width-9)/2))+"\u00AF\\_(\u30C4)_/\u00AF"
 }
 
 function gelogo(){
   
-  return bouncescroll("\uD83D\uDE4C\uD83D\uDE4C\uD83D\uDE4C Gipuzkoa Encounter 10")
+  return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10")
 }
 
 function kitt(){
@@ -182,6 +182,7 @@ function danceparty(){
   ;
 }
 
+// Uses blocksv for vertical bars
 function equalizer(){
 
   ;
@@ -189,7 +190,9 @@ function equalizer(){
 
 function train(){
 
-  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",])
+  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
+  "\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",
+  "\uD83D\uDE9D",])
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -202,18 +205,12 @@ test=1
 
 function main(){
 
+  str=""
   updateclock()
 
   //// TEST ZONE
-  //str=scroll("test")
-  //str=sinescroll("test\uD83D\uDC7E")
-  //str=loading()
-  //str=dunnolol()
-  //str=train()
-  //str=invaders()
-  //str=gelogo()
-  str=greets()
-  //str=bouncescroll("BLABLA")
+  str=train()
+
 
   //// SUPER SERIOUS ZONE
   if (test==0){
@@ -221,8 +218,7 @@ function main(){
     ;
   }
 
-  str=str+repeat(" ",width-str.length)+"|"
-  window.location.replace('# |'+str)
+  window.location.replace('# |'+str+repeat(" ",width-str.length)+"|")
 }
 
 function start(){
