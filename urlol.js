@@ -263,6 +263,36 @@ braile={
 "12345678":"\u28FF" //⣿
 }
 
+// Receives a 6 digit array and returns the braile encoding
+// e.g.: [0,0,0,0,0,0] => "\u2800"
+// The array represents a zone to encode:
+// 1 2
+// 3 4
+// 5 6
+// 7 8
+// Original braile encoding:
+// 1 4
+// 2 5
+// 3 6
+// 7 8
+function decodebraile(arr){
+
+  if (arr.any()){
+    out=""
+    if (arr[0]==1){out+="1"}
+    if (arr[1]==1){out+="4"}
+    if (arr[2]==1){out+="2"}
+    if (arr[3]==1){out+="5"}
+    if (arr[4]==1){out+="3"}
+    if (arr[5]==1){out+="6"}
+    if (arr[6]==1){out+="7"}
+    if (arr[7]==1){out+="8"}
+  }
+  else {out="0"}
+
+  return braile[out]
+}
+
 function updateclock(){
 
   deltat=Date.now()-starttime
