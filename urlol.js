@@ -288,7 +288,7 @@ function decodebraile(arr){
     if (arr[6]==1){out+="7"}
     if (arr[7]==1){out+="8"}
   }
-  else {out="0"}
+  else {out=""}
 
   return braile[out]
 }
@@ -369,9 +369,67 @@ function pong(){
   ;
 }
 
+snakeboard=[
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+]
+pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*80)]
+snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*80)]]
+snakeboard[snek[0][0]][snek[0][1]]="."
+snakeboard[pellet[0]][pellet[1]]="."
+lastdir=0
+
 function snake(){
 
-  ;
+  head=snek[0]
+  if      (head[0]==0 && lastdir==1) {lastdir=[3,4][Math.floor(Math.random()*3)]}
+  if      (head[0]==3 && lastdir==2) {lastdir=[3,4][Math.floor(Math.random()*3)]}
+  if      (head[0]>=0 && lastdir==3) {lastdir=[1,2][Math.floor(Math.random()*3)]}
+  if      (head[0]<40 && lastdir==4) {lastdir=[1,2][Math.floor(Math.random()*3)]}
+  if      (head[0]>pellet[0])  {snek=[[head[0]-1,head[1]  ]].concat(snek); lastdir=1}
+  else if (head[0]<pellet[0])  {snek=[[head[0]+1,head[1]  ]].concat(snek); lastdir=2}
+  else if (head[1]>pellet[1])  {snek=[[head[0],  head[1]-1]].concat(snek); lastdir=3}
+  else if (head[1]<pellet[1])  {snek=[[head[0],  head[1]+1]].concat(snek); lastdir=4}
+  else if (lastdir==1)         {snek=[[head[0]-1,head[1]  ]].concat(snek); lastdir=1}
+  else if (lastdir==2)         {snek=[[head[0]+1,head[1]  ]].concat(snek); lastdir=2}
+  else if (lastdir==3)         {snek=[[head[0],  head[1]-1]].concat(snek); lastdir=3}
+  else if (lastdir==4)         {snek=[[head[0],  head[1]+1]].concat(snek); lastdir=4}
+
+  snakeboard[snek[0][0]][snek[0][1]]="."
+
+  grow=0
+  if (snek[0][0]==pellet[0] && snek[0][1]==pellet[1]){grow=1}
+  
+  if (grow==0){
+    tail=snek.splice(-1)[0]
+    snakeboard[tail[0]][tail[1]]=""
+    if (snek.length==1) {spl=1}
+    else {spl=snek.length-1}
+    snek=snek.splice(0,spl)
+  }
+  else {
+    pellet[0]=Math.floor(Math.random()*4)
+    pellet[1]=Math.floor(Math.random()*80)
+    snakeboard[pellet[0]][pellet[1]]="."
+  }
+
+  out=""
+  for (i=0; i<80; i+=2){
+    temp=""
+    if (snakeboard[0][i]   == ".")  {temp+="1"}
+    if (snakeboard[0][i+1] == ".")  {temp+="2"}
+    if (snakeboard[1][i]   == ".")  {temp+="3"}
+    if (snakeboard[1][i+1] == ".")  {temp+="4"}
+    if (snakeboard[2][i]   == ".")  {temp+="5"}
+    if (snakeboard[2][i+1] == ".")  {temp+="6"}
+    if (snakeboard[3][i]   == ".")  {temp+="7"}
+    if (snakeboard[3][i+1] == ".")  {temp+="8"}
+    out+=braile[temp]
+  }
+
+  return out+"[Score:"+snek.length+"]"
 }
 
 function scroll(text){
@@ -548,7 +606,7 @@ ek=[
 
 function logo(){
 
-  if (step+3>ek.length){return ""}
+  if (step+3>=ek.length){return ""}
 
   out=""
   for (i=0; i<ek.length; i+=2){
@@ -596,15 +654,15 @@ function train(){
 //document.title=str
 
 test=1
+lastbeat=0
+str=""
 
 function main(){
 
-  str=""
   updateclock()
 
   //// TEST ZONE
-  str=logo()
-
+  if (beat!=lastbeat){str=snake();lastbeat=beat}
 
   //// SUPER SERIOUS ZONE
   if (test==0){
