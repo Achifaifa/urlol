@@ -263,36 +263,6 @@ braile={
 "12345678":"\u28FF" //⣿
 }
 
-// Receives a 6 digit array and returns the braile encoding
-// e.g.: [0,0,0,0,0,0] => "\u2800"
-// The array represents a zone to encode:
-// 1 2
-// 3 4
-// 5 6
-// 7 8
-// Original braile encoding:
-// 1 4
-// 2 5
-// 3 6
-// 7 8
-function decodebraile(arr){
-
-  if (arr.any()){
-    out=""
-    if (arr[0]==1){out+="1"}
-    if (arr[1]==1){out+="4"}
-    if (arr[2]==1){out+="2"}
-    if (arr[3]==1){out+="5"}
-    if (arr[4]==1){out+="3"}
-    if (arr[5]==1){out+="6"}
-    if (arr[6]==1){out+="7"}
-    if (arr[7]==1){out+="8"}
-  }
-  else {out=""}
-
-  return braile[out]
-}
-
 function updateclock(){
 
   deltat=Date.now()-starttime
@@ -370,13 +340,13 @@ function pong(){
 }
 
 snakeboard=[
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
 ]
-pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*80)]
-snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*80)]]
+pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
+snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]]
 snakeboard[snek[0][0]][snek[0][1]]="."
 snakeboard[pellet[0]][pellet[1]]="."
 lastdir=0
@@ -384,45 +354,43 @@ lastdir=0
 function snake(){
 
   head=snek[0]
-  if      (head[0]==0 && lastdir==1) {lastdir=[3,4][Math.floor(Math.random()*3)]}
-  if      (head[0]==3 && lastdir==2) {lastdir=[3,4][Math.floor(Math.random()*3)]}
-  if      (head[0]>=0 && lastdir==3) {lastdir=[1,2][Math.floor(Math.random()*3)]}
-  if      (head[0]<40 && lastdir==4) {lastdir=[1,2][Math.floor(Math.random()*3)]}
+  if      (head[0]==0 && lastdir==1) {lastdir=3}
+  if      (head[0]==3 && lastdir==2) {lastdir=4}
+  if      (head[0]>=0 && lastdir==3) {lastdir=1}
+  if      (head[0]<40 && lastdir==4) {lastdir=2}
   if      (head[0]>pellet[0])  {snek=[[head[0]-1,head[1]  ]].concat(snek); lastdir=1}
   else if (head[0]<pellet[0])  {snek=[[head[0]+1,head[1]  ]].concat(snek); lastdir=2}
   else if (head[1]>pellet[1])  {snek=[[head[0],  head[1]-1]].concat(snek); lastdir=3}
   else if (head[1]<pellet[1])  {snek=[[head[0],  head[1]+1]].concat(snek); lastdir=4}
-  else if (lastdir==1)         {snek=[[head[0]-1,head[1]  ]].concat(snek); lastdir=1}
-  else if (lastdir==2)         {snek=[[head[0]+1,head[1]  ]].concat(snek); lastdir=2}
-  else if (lastdir==3)         {snek=[[head[0],  head[1]-1]].concat(snek); lastdir=3}
-  else if (lastdir==4)         {snek=[[head[0],  head[1]+1]].concat(snek); lastdir=4}
+  else if (lastdir==1)         {snek=[[head[0]-1,head[1]  ]].concat(snek) }
+  else if (lastdir==2)         {snek=[[head[0]+1,head[1]  ]].concat(snek) }
+  else if (lastdir==3)         {snek=[[head[0],  head[1]-1]].concat(snek) }
+  else if (lastdir==4)         {snek=[[head[0],  head[1]+1]].concat(snek) }
 
-  snakeboard[snek[0][0]][snek[0][1]]="."
+  head=snek[0]
+  snakeboard[head[0]][head[1]]="."
 
   grow=0
-  if (snek[0][0]==pellet[0] && snek[0][1]==pellet[1]){grow=1}
-  
-  if (grow==0){
-    tail=snek.splice(-1)[0]
-    snakeboard[tail[0]][tail[1]]=""
-    if (snek.length==1) {spl=1}
-    else {spl=snek.length-1}
-    snek=snek.splice(0,spl)
-  }
-  else {
-    pellet[0]=Math.floor(Math.random()*4)
-    pellet[1]=Math.floor(Math.random()*80)
+  if (head[0]==pellet[0] && head[1]==pellet[1]){
+    old=[pellet[0],pellet[1]]
+    while (old[0]==pellet[0]){pellet[0]=Math.floor(Math.random()*4)}
+    while (old[1]==pellet[1]){pellet[1]=Math.floor(Math.random()*40)}
     snakeboard[pellet[0]][pellet[1]]="."
   }
+  
+  else {
+    tail=snek.splice(-1)[0]
+    snakeboard[tail[0]][tail[1]]=""
+}
 
   out=""
-  for (i=0; i<80; i+=2){
+  for (i=0; i<40; i+=2){
     temp=""
     if (snakeboard[0][i]   == ".")  {temp+="1"}
-    if (snakeboard[0][i+1] == ".")  {temp+="2"}
-    if (snakeboard[1][i]   == ".")  {temp+="3"}
-    if (snakeboard[1][i+1] == ".")  {temp+="4"}
-    if (snakeboard[2][i]   == ".")  {temp+="5"}
+    if (snakeboard[1][i]   == ".")  {temp+="2"}
+    if (snakeboard[2][i]   == ".")  {temp+="3"}
+    if (snakeboard[0][i+1] == ".")  {temp+="4"}
+    if (snakeboard[1][i+1] == ".")  {temp+="5"}
     if (snakeboard[2][i+1] == ".")  {temp+="6"}
     if (snakeboard[3][i]   == ".")  {temp+="7"}
     if (snakeboard[3][i+1] == ".")  {temp+="8"}
@@ -662,7 +630,7 @@ function main(){
   updateclock()
 
   //// TEST ZONE
-  if (beat!=lastbeat){str=snake();lastbeat=beat}
+  str=snake()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
