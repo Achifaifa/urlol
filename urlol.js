@@ -580,10 +580,10 @@ function logo(){
   for (i=0; i<ek.length; i+=2){
     temp=""
     if (ek[step][i]=="."){temp+="1"}
-    if (ek[step][i+1]=="."){temp+="2"}
-    if (ek[step+1][i]=="."){temp+="3"}
-    if (ek[step+1][i+1]=="."){temp+="4"}
-    if (ek[step+2][i]=="."){temp+="5"}
+    if (ek[step+1][i]=="."){temp+="2"}
+    if (ek[step+2][i]=="."){temp+="3"}
+    if (ek[step][i+1]=="."){temp+="4"}
+    if (ek[step+1][i+1]=="."){temp+="5"}
     if (ek[step+2][i+1]=="."){temp+="6"}
     if (ek[step+3][i]=="."){temp+="7"}
     if (ek[step+3][i+1]=="."){temp+="8"}
@@ -630,7 +630,7 @@ function main(){
   updateclock()
 
   //// TEST ZONE
-  str=snake()
+  str=logo()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
