@@ -348,10 +348,12 @@ snakeboard=[
 pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
 snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]]
 snakeboard[snek[0][0]][snek[0][1]]="."
-snakeboard[pellet[0]][pellet[1]]="."
+snakeboard[pellet[0]][pellet[1]]="P"
 lastdir=0
 
 function snake(){
+
+  document.title="nom nom nom"
 
   head=snek[0]
   if      (head[0]==0 && lastdir==1) {lastdir=3}
@@ -373,9 +375,23 @@ function snake(){
   grow=0
   if (head[0]==pellet[0] && head[1]==pellet[1]){
     old=[pellet[0],pellet[1]]
-    while (old[0]==pellet[0]){pellet[0]=Math.floor(Math.random()*4)}
-    while (old[1]==pellet[1]){pellet[1]=Math.floor(Math.random()*40)}
-    snakeboard[pellet[0]][pellet[1]]="."
+    while (old[0]==pellet[0] || rep==1){
+      rep=0
+      pellet[0]=Math.floor(Math.random()*4)
+      pellet[1]=Math.floor(Math.random()*40)
+      for (i=0; i<snek.length; i++){
+        if (snek[i][0]==pellet[0] && snek[i][1]==pellet[1]){rep=1}
+      }
+    }
+    while (old[1]==pellet[1]){
+      rep=0
+      pellet[0]=Math.floor(Math.random()*4)
+      pellet[1]=Math.floor(Math.random()*40)
+      for (i=0; i<snek.length; i++){
+        if (snek[i][0]==pellet[0] && snek[i][1]==pellet[1]){rep=1}
+      }
+    }
+    snakeboard[pellet[0]][pellet[1]]="P"
   }
   
   else {
@@ -386,18 +402,18 @@ function snake(){
   out=""
   for (i=0; i<40; i+=2){
     temp=""
-    if (snakeboard[0][i]   == ".")  {temp+="1"}
-    if (snakeboard[1][i]   == ".")  {temp+="2"}
-    if (snakeboard[2][i]   == ".")  {temp+="3"}
-    if (snakeboard[0][i+1] == ".")  {temp+="4"}
-    if (snakeboard[1][i+1] == ".")  {temp+="5"}
-    if (snakeboard[2][i+1] == ".")  {temp+="6"}
-    if (snakeboard[3][i]   == ".")  {temp+="7"}
-    if (snakeboard[3][i+1] == ".")  {temp+="8"}
+    if (snakeboard[0][i]   == "." || snakeboard[0][i]   == "P")  {temp+="1"}
+    if (snakeboard[1][i]   == "." || snakeboard[1][i]   == "P")  {temp+="2"}
+    if (snakeboard[2][i]   == "." || snakeboard[2][i]   == "P")  {temp+="3"}
+    if (snakeboard[0][i+1] == "." || snakeboard[0][i+1] == "P")  {temp+="4"}
+    if (snakeboard[1][i+1] == "." || snakeboard[1][i+1] == "P")  {temp+="5"}
+    if (snakeboard[2][i+1] == "." || snakeboard[2][i+1] == "P")  {temp+="6"}
+    if (snakeboard[3][i]   == "." || snakeboard[3][i]   == "P")  {temp+="7"}
+    if (snakeboard[3][i+1] == "." || snakeboard[3][i+1] == "P")  {temp+="8"}
     out+=braile[temp]
   }
 
-  return out+"[Score:"+snek.length+"]"
+  return out+" [Score:"+snek.length+"]"
 }
 
 function scroll(text){
@@ -479,11 +495,13 @@ function invaders(){
 
 function dunnolol(){
 
+  document.title="dunno, lol"
   return repeat(" ",Math.floor((width-9)/2))+"\u00AF\\_(\u30C4)_/\u00AF"
 }
 
 function gelogo(){
   
+  document.title=""
   return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10")
 }
 
@@ -577,7 +595,7 @@ function logo(){
   if (step+3>=ek.length){return ""}
 
   out=""
-  for (i=0; i<ek.length; i+=2){
+  for (i=0; i<80; i+=2){
     temp=""
     if (ek[step][i]=="."){temp+="1"}
     if (ek[step+1][i]=="."){temp+="2"}
@@ -610,6 +628,7 @@ function equalizer(){
 
 function train(){
 
+  document.title="Choo choo!"
   return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
   "\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",
   "\uD83D\uDE9D",])
@@ -630,7 +649,13 @@ function main(){
   updateclock()
 
   //// TEST ZONE
-  str=logo()
+  //str=logo()
+  if(step%2==0){str=snake()}
+  //str=loading()
+  //str=greets()
+  //str=train()
+  //str=invaders()
+  //str=dunnolol()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
