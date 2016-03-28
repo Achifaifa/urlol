@@ -588,30 +588,67 @@ function dunnolol(){
   return repeat(" ",Math.floor((width-9)/2))+"\u00AF\\_(\u30C4)_/\u00AF"
 }
 
-function gelogo(){
-  
-  document.title=""
-  return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10")
+meatt=1.3
+meatgoo=0.95
+function meatballs(){
+
+  if (Math.floor(step/60)%2==0) {stp=step%57}
+  else                          {stp=60-(step%57)}
+
+  meatgrid=[["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+            ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+            ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+            ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]]
+
+  meatang=3.14*step/150
+  meatballA=[300+Math.cos(meatang*2.5)*50,300+Math.sin(meatang*2)*150]
+  meatballB=[300+Math.sin(meatang*1.8)*50,300+Math.cos(meatang*2.0)*150]
+  meatballC=[300+Math.sin(meatang+100)*50,300+Math.cos(meatang+50)*150]
+
+  for (i=0; i<60; i++){
+    for (j=28; j<32; j++){
+      if ((40/Math.pow(Math.sqrt(Math.pow(meatballA[0]-j*10,2)+Math.pow(meatballA[1]-i*10,2)),meatgoo))+
+          (30/Math.pow(Math.sqrt(Math.pow(meatballB[0]-j*10,2)+Math.pow(meatballB[1]-i*10,2)),meatgoo))+
+          (35/Math.pow(Math.sqrt(Math.pow(meatballC[0]-j*10,2)+Math.pow(meatballC[1]-i*10,2)),meatgoo))>meatt){
+        meatgrid[j-28][i]="."
+      }
+    }
+  }
+
+  return vscroll(meatgrid,0)
+}
+
+function vscroll(grid,zero){
+
+  if (step+3>=grid.length && zero==1){return ""}
+  if (zero==0){stp=0}
+  else if (zero==1){stp=step}
+  out=""
+  for (i=0; i<grid[0].length; i+=2){
+    temp=""
+    if (grid[stp][i]=="."){temp+="1"}
+    if (grid[stp+1][i]=="."){temp+="2"}
+    if (grid[stp+2][i]=="."){temp+="3"}
+    if (grid[stp][i+1]=="."){temp+="4"}
+    if (grid[stp+1][i+1]=="."){temp+="5"}
+    if (grid[stp+2][i+1]=="."){temp+="6"}
+    if (grid[stp+3][i]=="."){temp+="7"}
+    if (grid[stp+3][i+1]=="."){temp+="8"}
+    out+=braile[temp]
+  }
+
+  return out
 }
 
 function logo(){
 
-  if (step+3>=ek.length){return ""}
+  return vscroll(ek,1)
+}
 
-  out=""
-  for (i=0; i<80; i+=2){
-    temp=""
-    if (ek[step][i]=="."){temp+="1"}
-    if (ek[step+1][i]=="."){temp+="2"}
-    if (ek[step+2][i]=="."){temp+="3"}
-    if (ek[step][i+1]=="."){temp+="4"}
-    if (ek[step+1][i+1]=="."){temp+="5"}
-    if (ek[step+2][i+1]=="."){temp+="6"}
-    if (ek[step+3][i]=="."){temp+="7"}
-    if (ek[step+3][i+1]=="."){temp+="8"}
-    out+=braile[temp]
-  }
-  return out
+function gelogo(){
+  
+  document.title=""
+  return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10")
 }
 
 function kitt(){
@@ -621,7 +658,7 @@ function kitt(){
 
 function danceparty(){
 
-  ;
+  
 }
 
 // Uses blocksv for vertical bars
@@ -656,7 +693,7 @@ function main(){
   substep+=(step-laststep)
 
   //// TEST ZONE
-  //str=logo()
+  str=meatballs()
 
   // if(step%2==0){
   //   str=snake()
@@ -667,7 +704,7 @@ function main(){
   //str=train()
   //str=invaders()
   //str=dunnolol()
-  str=startrail()
+  //str=startrail()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
