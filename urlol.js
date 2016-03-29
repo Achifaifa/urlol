@@ -409,7 +409,7 @@ function greets(){
   if (cursgreet<greeted.length) {
     if      (cursstep<20) {string=repeat(blocksh[Math.floor(cursstep/2.9)],width)}
     else if (cursstep>130) {string=repeat(blocksv[Math.floor((cursstep-130)/2.9)],width)}
-    else {string=bouncescroll(greeted[cursgreet])}
+    else {string=bouncescroll(greeted[cursgreet]," ",width)}
   }
   return string
 }
@@ -517,11 +517,12 @@ function scroll(text){
   return string
 }
 
-function bouncescroll(text){
+function bouncescroll(text,filler,wid){
 
-  marg=(width-text.length)*2
+  marg=(wid-text.length)*2
   stp=Math.abs((step%marg)-marg/2)
-  return repeat(" ",stp)+text
+  temp=repeat(filler,stp)+text
+  return temp+repeat(filler,wid-temp.length)
 }
 
 sup={
@@ -579,7 +580,7 @@ invadertypes=[
 
 function invaders(){
 
-  return bouncescroll(invadertypes[beat%4])
+  return bouncescroll(invadertypes[beat%4]," ",width)
 }
 
 function dunnolol(){
@@ -591,6 +592,9 @@ function dunnolol(){
 meatt=1.3
 meatgoo=0.95
 function meatballs(){
+  // Recycle functions, save the planet
+
+  document.title=bouncescroll("Meatballs FTW",".",34)
 
   if (Math.floor(step/60)%2==0) {stp=step%57}
   else                          {stp=60-(step%57)}
@@ -648,7 +652,7 @@ function logo(){
 function gelogo(){
   
   document.title=""
-  return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10")
+  return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10"," ",width)
 }
 
 function kitt(){
@@ -694,7 +698,7 @@ function main(){
 
   //// TEST ZONE
   str=meatballs()
-
+  //str=logo()
   // if(step%2==0){
   //   str=snake()
   //   if (str="Game Over") {substep=0}
