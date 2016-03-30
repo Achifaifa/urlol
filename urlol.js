@@ -2,10 +2,16 @@
 step=0
 beat=0
 starttime=Date.now()
-width=60
+width=40
 
 ek=[
-"","","","","","","","","","","","","",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
 "                                                .....                           ",
 "                                              ..    ..                          ",
 "                                              .      ..                         ",
@@ -86,7 +92,13 @@ ek=[
 "                            .........................                           ",
 "                            .....................                               ",
 "                              ..............                                    ",
-"","","","","","","","","","","","","",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                ",
+"                                                                                "
 ]
 
 braile={
@@ -355,6 +367,7 @@ function updateclock(){
   beat=Math.floor(deltat/344.8276)
 }
 
+// Seriously JS? No str/arr multiplication? SERIOUSLY?
 function repeat(pattern, count) {
 
   if (count<1) return '';
@@ -392,7 +405,7 @@ function loading(){
 
 function startrail(){
 
-  return scroll("\uD83C\uDF1F==")
+  return scroll("\uD83C\uDF1F==  *\u203E  ._")
 }
 
 greeted=["BLWARGH","WEARGHH","BLWORPS","ZWALGRS","HWALPRZ"]
@@ -414,16 +427,6 @@ function greets(){
   return string
 }
 
-function fire(){
-
-  ;
-}
-
-function pong(){
-
-  ;
-}
-
 function snakereset(){
   snakeboard=[
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -431,7 +434,7 @@ function snakereset(){
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
   ]
-  noms=[repeat("\u2800",8)+"nom",repeat("\u2800",12)+"nom","nom",repeat("\u2800",4)+"nom"]
+  
 
   over=0
   pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
@@ -441,14 +444,13 @@ function snakereset(){
   lastdir=0
 }
 
+noms=[repeat("\u2800",8)+"nom",repeat("\u2800",12)+"nom","nom",repeat("\u2800",4)+"nom"]
 function snake(){
 
   if (mark[0]==0){
     snakereset()
     mark[0]=1
   }
-
-  document.title=noms[beat%4]
 
   head=snek[0]
   if      (head[0]==0 && lastdir==1) {lastdir=3}
@@ -509,6 +511,7 @@ function snake(){
     out+=braile[temp]
   }
 
+  document.title=noms[beat%4]
   if (over==1){return "Game Over"}
   return out+" [Score:"+snek.length+"]"
 }
@@ -518,7 +521,7 @@ function scroll(text){
   len=width-(Math.floor(step/3))
   string=""
   for (i=0; i<width; i++){
-    if (i<len){string=string+" "}
+    if (i<len){string=string+"\u2800"}
     else {string=string+text[i-len]}
   }
   string=string.replace(/undefined/g, '')
@@ -663,6 +666,14 @@ function gelogo(){
   return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10",width)
 }
 
+function train(){
+
+  document.title="Choo choo!"
+  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
+  "\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",
+  "\uD83D\uDE9D",])
+}
+
 function kitt(){
 
   ;
@@ -670,7 +681,7 @@ function kitt(){
 
 function danceparty(){
 
-  
+  ;
 }
 
 // Uses blocksv for vertical bars
@@ -679,13 +690,16 @@ function equalizer(){
   ;
 }
 
-function train(){
+function fire(){
 
-  document.title="Choo choo!"
-  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
-  "\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",
-  "\uD83D\uDE9D",])
+  ;
 }
+
+function pong(){
+
+  ;
+}
+
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -705,9 +719,9 @@ function main(){
 
   //// TEST ZONE
   //str=meatballs()
-  //str=logo()
-  str=snake(mark[0])
-  if (str=="Game Over") {mark[0]=0}
+  str=logo()
+  // str=snake(mark[0])
+  // if (str=="Game Over") {mark[0]=0}
   //str=loading()
   //str=greets()
   //str=train()
