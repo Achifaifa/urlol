@@ -424,23 +424,31 @@ function pong(){
   ;
 }
 
-snakeboard=[
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
-]
+function snakereset(){
+  snakeboard=[
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+  ]
+  noms=[repeat("\u2800",8)+"nom",repeat("\u2800",12)+"nom","nom",repeat("\u2800",4)+"nom"]
 
-over=0
-pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
-snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]]
-snakeboard[snek[0][0]][snek[0][1]]="."
-snakeboard[pellet[0]][pellet[1]]="P"
-lastdir=0
+  over=0
+  pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
+  snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]]
+  snakeboard[snek[0][0]][snek[0][1]]="."
+  snakeboard[pellet[0]][pellet[1]]="P"
+  lastdir=0
+}
 
 function snake(){
 
-  document.title="nom nom nom"
+  if (mark[0]==0){
+    snakereset()
+    mark[0]=1
+  }
+
+  document.title=noms[beat%4]
 
   head=snek[0]
   if      (head[0]==0 && lastdir==1) {lastdir=3}
@@ -688,21 +696,18 @@ function train(){
 test=1
 lastbeat=beat
 laststep=step
-substep=0
+mark=[0]
 str=""
 
 function main(){
 
   updateclock()
-  substep+=(step-laststep)
 
   //// TEST ZONE
-  str=meatballs()
+  //str=meatballs()
   //str=logo()
-  // if(step%2==0){
-  //   str=snake()
-  //   if (str="Game Over") {substep=0}
-  // }
+  str=snake(mark[0])
+  if (str=="Game Over") {mark[0]=0}
   //str=loading()
   //str=greets()
   //str=train()
@@ -710,13 +715,15 @@ function main(){
   //str=dunnolol()
   //str=startrail()
 
+
   //// SUPER SERIOUS ZONE
   if (test==0){
 
     ;
   }
 
-  window.location.replace('# |'+str+repeat(" ",width-str.length)+"|")
+  
+  window.location.replace('# |'+str+repeat("\u2800",width-str.length)+"|")
 }
 
 function start(){
