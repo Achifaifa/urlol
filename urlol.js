@@ -102,7 +102,7 @@ ek=[
 ]
 
 braile={
-"":"\u2800", //⠀
+"":"\u2800", //⠀1
 "1":"\u2801", //⠁
 "2":"\u2802", //⠂
 "12":"\u2803", //⠃
@@ -700,6 +700,25 @@ function pong(){
   ;
 }
 
+function colours(){
+
+  palette=[1,2,3]
+  fill="\u28FF"
+  none="\u2800"
+
+  out=""
+  if (step%palette[0]==0){out+=fill}
+  else {out+=none}
+  if (step%palette[1]==0){out+=fill}
+  else {out+=none}
+  if (step%palette[2]==0){out+=fill}
+  else {out+=none}
+ 
+
+  return out
+
+}
+
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -719,15 +738,16 @@ function main(){
 
   //// TEST ZONE
   //str=meatballs()
-  str=logo()
+  //str=logo()
   // str=snake(mark[0])
   // if (str=="Game Over") {mark[0]=0}
   //str=loading()
   //str=greets()
   //str=train()
   //str=invaders()
-  //str=dunnolol()
+  str=dunnolol()
   //str=startrail()
+  //str=colours()
 
 
   //// SUPER SERIOUS ZONE
