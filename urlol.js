@@ -689,7 +689,7 @@ function equalizer(){
 
   out=""
   for (i=0; i<width; i++){
-    out+=blocksv[step%blocksv.length]
+    out+=blocksv[step%(Math.floor(Math.random()*blocksv.length)+1)]
   }
 
   return out
