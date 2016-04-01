@@ -687,7 +687,12 @@ function danceparty(){
 // Uses blocksv for vertical bars
 function equalizer(){
 
-  ;
+  out=""
+  for (i=0; i<width; i++){
+    out+=blocksv[step%blocksv.length]
+  }
+
+  return out
 }
 
 function fire(){
@@ -700,6 +705,8 @@ function pong(){
   ;
 }
 
+// Attempt to generate a grayscale palette by 
+// controlling the update frequency of the text
 function colours(){
 
   palette=[1,2,3]
@@ -745,9 +752,10 @@ function main(){
   //str=greets()
   //str=train()
   //str=invaders()
-  str=dunnolol()
+  //str=dunnolol()
   //str=startrail()
   //str=colours()
+  str=equalizer()
 
 
   //// SUPER SERIOUS ZONE
