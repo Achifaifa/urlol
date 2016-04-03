@@ -524,7 +524,7 @@ function scroll(text){
     if (i<len){string=string+"\u2800"}
     else {string=string+text[i-len]}
   }
-  string=string.replace(/undefined/g, '')
+  string=string.replace(/undefined/g, '\u2800')
   return string
 }
 
@@ -533,7 +533,8 @@ function bouncescroll(text,wid){
   stp=Math.floor(step/2)
   marg=(wid-text.length)*2
   vw=Math.abs((stp%marg)-marg/2)
-  return repeat("\u2800",vw)+text
+  rmarg=wid-vw-text.length-5
+  return repeat("\u2800",vw)+text+repeat("\u2800",rmarg)
 }
 
 sup={
@@ -674,16 +675,6 @@ function train(){
   "\uD83D\uDE9D",])
 }
 
-function kitt(){
-
-  ;
-}
-
-function danceparty(){
-
-  ;
-}
-
 // Uses blocksv for vertical bars
 function equalizer(){
 
@@ -693,6 +684,36 @@ function equalizer(){
   }
 
   return out
+}
+
+function merge(str1, str2){
+
+  out=""
+  for (i=0; i<str1.length; i++){
+    if (str1[i]=="\u2800"){out+=str2[i]}
+    else {out+=str1[i]}
+  } 
+
+  return out
+}
+
+buildings=""
+for (i=0; i<100; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length)]}
+buildings=repeat(blocksv[0],10)+buildings+repeat(blocksv[0],10)
+function parallol(){
+
+  document.title=scroll("The city that never sleeps...")
+  return scroll(buildings)
+}
+
+function kitt(){
+
+  ;
+}
+
+function danceparty(){
+
+  ;
 }
 
 function fire(){
@@ -755,7 +776,8 @@ function main(){
   //str=dunnolol()
   //str=startrail()
   //str=colours()
-  str=equalizer()
+  //str=merge(invaders(),equalizer())
+  str=parallol()
 
 
   //// SUPER SERIOUS ZONE
