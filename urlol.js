@@ -697,12 +697,22 @@ function merge(str1, str2){
   return out
 }
 
+cloudframes=[
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF29","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+]
 buildings=""
 for (i=0; i<100; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length)]}
 buildings=repeat(blocksv[0],10)+buildings+repeat(blocksv[0],10)
 function parallol(){
 
-  document.title=scroll("The city that never sleeps...")
+  //document.title=scroll(scroll(cloudframes[beat%8]))
   return scroll(buildings)
 }
 
@@ -777,7 +787,8 @@ function main(){
   //str=startrail()
   //str=colours()
   //str=merge(invaders(),equalizer())
-  str=parallol()
+  //str=parallol()
+  str=scroll(scroll(cloudframes[beat%8]))
 
 
   //// SUPER SERIOUS ZONE
