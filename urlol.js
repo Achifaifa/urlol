@@ -726,37 +726,10 @@ function danceparty(){
   ;
 }
 
-function fire(){
-
-  ;
-}
-
 function pong(){
 
   ;
 }
-
-// Attempt to generate a grayscale palette by 
-// controlling the update frequency of the text
-function colours(){
-
-  palette=[1,2,3]
-  fill="\u28FF"
-  none="\u2800"
-
-  out=""
-  if (step%palette[0]==0){out+=fill}
-  else {out+=none}
-  if (step%palette[1]==0){out+=fill}
-  else {out+=none}
-  if (step%palette[2]==0){out+=fill}
-  else {out+=none}
- 
-
-  return out
-
-}
-
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -788,7 +761,7 @@ function main(){
   //str=colours()
   //str=merge(invaders(),equalizer())
   //str=parallol()
-  str=scroll(scroll(cloudframes[beat%8]))
+  //str=scroll(scroll(cloudframes[beat%8]))
 
 
   //// SUPER SERIOUS ZONE
@@ -813,73 +786,73 @@ start()
 /////////copypaste from example3.html for the eq/////////
 /////////////////////////////////////////////////////////
 
-$(function () {
-      var context;
-      if (typeof AudioContext !== "undefined") {
-          context = new AudioContext();
-      } else if (typeof webkitAudioContext !== "undefined") {
-          context = new webkitAudioContext();
-      } else {
-          $(".hideIfNoApi").hide();
-          $(".showIfNoApi").show();
-          return;
-      }
+// $(function () {
+//       var context;
+//       if (typeof AudioContext !== "undefined") {
+//           context = new AudioContext();
+//       } else if (typeof webkitAudioContext !== "undefined") {
+//           context = new webkitAudioContext();
+//       } else {
+//           $(".hideIfNoApi").hide();
+//           $(".showIfNoApi").show();
+//           return;
+//       }
 
-      var lastTime = 0;
-      var vendors = ['ms', 'moz', 'webkit', 'o'];
-      for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-          window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-          window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
-                                      || window[vendors[x] + 'CancelRequestAnimationFrame'];
-      }
+//       var lastTime = 0;
+//       var vendors = ['ms', 'moz', 'webkit', 'o'];
+//       for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+//           window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+//           window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
+//                                       || window[vendors[x] + 'CancelRequestAnimationFrame'];
+//       }
 
-      if (!window.requestAnimationFrame)
-          window.requestAnimationFrame = function (callback, element) {
-              var currTime = new Date().getTime();
-              var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-              var id = window.setTimeout(function () { callback(currTime + timeToCall); },
-                  timeToCall);
-              lastTime = currTime + timeToCall;
-              return id;
-          };
+//       if (!window.requestAnimationFrame)
+//           window.requestAnimationFrame = function (callback, element) {
+//               var currTime = new Date().getTime();
+//               var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+//               var id = window.setTimeout(function () { callback(currTime + timeToCall); },
+//                   timeToCall);
+//               lastTime = currTime + timeToCall;
+//               return id;
+//           };
 
-      if (!window.cancelAnimationFrame)
-          window.cancelAnimationFrame = function (id) {
-              clearTimeout(id);
-          };
+//       if (!window.cancelAnimationFrame)
+//           window.cancelAnimationFrame = function (id) {
+//               clearTimeout(id);
+//           };
 
-      var analyser = context.createAnalyser();
-      analyser.fftSize = 64;
-      var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+//       var analyser = context.createAnalyser();
+//       analyser.fftSize = 64;
+//       var frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
-      var visualisation = $("#visualisation");
-      for (var i = 0; i < analyser.frequencyBinCount; i++) {
-        $("<div/>").css("left", i * 6 + "px")
-        .appendTo(visualisation);
-      }
-      var bars = $("#visualisation > div");
+//       var visualisation = $("#visualisation");
+//       for (var i = 0; i < analyser.frequencyBinCount; i++) {
+//         $("<div/>").css("left", i * 6 + "px")
+//         .appendTo(visualisation);
+//       }
+//       var bars = $("#visualisation > div");
 
-      function update() {
-          requestAnimationFrame(update);
+//       function update() {
+//           requestAnimationFrame(update);
 
-          analyser.getByteFrequencyData(frequencyData);
+//           analyser.getByteFrequencyData(frequencyData);
 
-          bars.each(function (index, bar) {
-              bar.style.height = Math.round((frequencyData[index] / 255 * 408) / 3) * 3 + 'px';
-          });
-      };
+//           bars.each(function (index, bar) {
+//               bar.style.height = Math.round((frequencyData[index] / 255 * 408) / 3) * 3 + 'px';
+//           });
+//       };
 
-      // Hook up the audio routing...
-      // player -> analyser -> speakers
-    // (Do this after the player is ready to play - https://code.google.com/p/chromium/issues/detail?id=112368#c4)
-    $("#player").bind('canplay', function() {
-      var source = context.createMediaElementSource(this);
-      source.connect(analyser);
-      analyser.connect(context.destination);
-    });
+//       // Hook up the audio routing...
+//       // player -> analyser -> speakers
+//     // (Do this after the player is ready to play - https://code.google.com/p/chromium/issues/detail?id=112368#c4)
+//     $("#player").bind('canplay', function() {
+//       var source = context.createMediaElementSource(this);
+//       source.connect(analyser);
+//       analyser.connect(context.destination);
+//     });
 
-      // Kick it off...
-      var audio = document.getElementById("player");
-      audio.play();
-      update();
-  });
+//       // Kick it off...
+//       var audio = document.getElementById("player");
+//       audio.play();
+//       update();
+//   });
