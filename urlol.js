@@ -716,8 +716,8 @@ function parallol(){
   return scroll(buildings)
 }
 
-tetrispieces=[["..",".."]]
-droporder[(0,0,0)]
+tetrispieces=[["..",".."],["..."," . "],[".  ","..."],["  .","..."],[".. "," .."],[" ..",".. "],["...."]]
+droporder[(0,0),(3,6)]
 function tetrisreset(){
   tetrisboard=[
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -727,7 +727,8 @@ function tetrisreset(){
   ]
 
   over=0
-  piece=Math.floor(Math.random()*tetrispieces.length)
+  piece=[0]
+  dropqueue=[0]
 }
 
 function tetris(){
@@ -736,6 +737,23 @@ function tetris(){
     tetrisreset()
     mark[0]=1
   }
+
+  if (piece[0]==0){
+    piece[0]=[tetrispieces[droporder[dropqueue[0]][0]],40,droporder[dropqueue[0]][2]]
+  }
+
+  piece[0][1]-=1
+  if (tetrisboard[piece[0]][piece[1]]=="."){
+    //merge piece
+    dropqueue[0]+=1
+    piece[0]=[tetrispieces[droporder[dropqueue[0]][0]],40,droporder[dropqueue[0]][2]]
+  }
+
+  // create temporary board, fill, etc etc etc
+
+  // render board
+
+  // return render
 
 }
 
