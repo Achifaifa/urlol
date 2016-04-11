@@ -717,7 +717,12 @@ function parallol(){
 }
 
 tetrispieces=[["..",".."],["..."," . "],[".  ","..."],["  .","..."],[".. "," .."],[" ..",".. "],["...."]]
-droporder[(0,0),(3,6)]
+tempboard=[
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+  ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+  ]
 function tetrisreset(){
   tetrisboard=[
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -727,8 +732,7 @@ function tetrisreset(){
   ]
 
   over=0
-  piece=[0]
-  dropqueue=[0]
+  piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
 }
 
 function tetris(){
@@ -738,23 +742,47 @@ function tetris(){
     mark[0]=1
   }
 
-  if (piece[0]==0){
-    piece[0]=[tetrispieces[droporder[dropqueue[0]][0]],40,droporder[dropqueue[0]][2]]
+  piece[1]+=1
+
+  contact=0
+  for (i=0; i<piece[0].length; i++){
+    for (j=0; j<piece[0][0].length; j++){
+      if (piece[0][i][piece[0][0].length-1-j]=="." && tetrisboard[piece[2]+i][piece[1]+piece[0][0].length-j]=="."){
+        contact=1
+      }
+    }
   }
 
-  piece[0][1]-=1
-  if (tetrisboard[piece[0]][piece[1]]=="."){
-    //merge piece
-    dropqueue[0]+=1
-    piece[0]=[tetrispieces[droporder[dropqueue[0]][0]],40,droporder[dropqueue[0]][2]]
+  if (contact==1 || piece[1]+piece[0][0].length>39){
+    for (i=0; i<piece[0].length; i++){
+      for (j=0; j<piece[0][0].length; j++){
+        if (piece[0][i][j]=="."){
+          tetrisboard[piece[2]+i][piece[1]+j]=piece[0][i][j]
+        }
+      }
+    }
+    piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
+  
+    remove=0
+    while (remove==0){
+      if (tetrisboard[0][tetrisboard.length-1]=="." &&tetrisboard[0][tetrisboard.length-1]=="." &&tetrisboard[2][tetrisboard.length-1]=="." && tetrisboard[3][tetrisboard.length-1]=="." )
+    }
   }
 
-  // create temporary board, fill, etc etc etc
+  for (i=0; i<tetrisboard.length; i++){
+    for (j=0; j<tetrisboard[0].length; j++){
+      tempboard[i][j]=tetrisboard[i][j]
+    }
+  }
+  for (i=0; i<piece[0].length; i++){
+    for (j=0; j<piece[0][0].length; j++){
+      if (piece[0][i][j]=="."){
+        tempboard[piece[2]+i][piece[1]+j]=piece[0][i][j]
+      }
+    }
+  }
 
-  // render board
-
-  // return render
-
+  return vscroll(tempboard,0)
 }
 
 function kitt(){
@@ -803,7 +831,7 @@ function main(){
   //str=merge(invaders(),equalizer())
   //str=parallol()
   //str=scroll(scroll(cloudframes[beat%8]))
-
+  str=tetris()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
