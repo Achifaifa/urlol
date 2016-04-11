@@ -723,7 +723,9 @@ tempboard=[
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
   ]
+
 function tetrisreset(){
+
   tetrisboard=[
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -807,11 +809,12 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 lastbeat=beat
 laststep=step
 mark=[0]
 str=""
+init=0
 
 function main(){
 
@@ -825,7 +828,7 @@ function main(){
   //str=loading()
   //str=greets()
   //str=train()
-  str=invaders()
+  //str=invaders()
   //str=dunnolol()
   //str=startrail()
   //str=colours()
@@ -837,7 +840,27 @@ function main(){
   //// SUPER SERIOUS ZONE
   if (test==0){
 
-    ;
+    if (beat<16){
+      str="intro"
+    }
+
+    else if (beat<32){
+      str="ef1"
+    }
+
+    else if (beat<47){
+      str="ef2"
+    }
+
+    else if (beat<63){
+      str=snake(mark[0])
+      if (str=="Game Over") {mark[0]=0}
+    } 
+
+    else {
+      if (init==0){mark[0]=0; init=1}
+      str=tetris()
+    }
   }
 
   
