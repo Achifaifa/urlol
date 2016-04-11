@@ -742,6 +742,10 @@ function tetris(){
     mark[0]=1
   }
 
+  if (piece[0][0][piece[0][0].length-1]=="." && tetrisboard[piece[2]][piece[1]+piece[0][0].length]=="."){
+    tetrisreset()
+  }
+
   piece[1]+=1
 
   contact=0
@@ -762,12 +766,9 @@ function tetris(){
       }
     }
     piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
-  
-    remove=0
-    while (remove==0){
-      if (tetrisboard[0][tetrisboard.length-1]=="." &&tetrisboard[0][tetrisboard.length-1]=="." &&tetrisboard[2][tetrisboard.length-1]=="." && tetrisboard[3][tetrisboard.length-1]=="." )
-    }
   }
+
+  // remove full lines
 
   for (i=0; i<tetrisboard.length; i++){
     for (j=0; j<tetrisboard[0].length; j++){
