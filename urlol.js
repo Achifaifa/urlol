@@ -363,8 +363,8 @@ braile={
 function updateclock(){
 
   deltat=Date.now()-starttime
-  step=Math.floor(deltat/33)
-  beat=Math.floor(deltat/344.8276)
+  step=Math.floor(deltat/30)
+  beat=Math.floor(deltat/542)
 }
 
 // Seriously JS? No str/arr multiplication? SERIOUSLY?
@@ -825,14 +825,14 @@ function main(){
   //str=loading()
   //str=greets()
   //str=train()
-  //str=invaders()
+  str=invaders()
   //str=dunnolol()
   //str=startrail()
   //str=colours()
   //str=merge(invaders(),equalizer())
   //str=parallol()
   //str=scroll(scroll(cloudframes[beat%8]))
-  str=tetris()
+  //str=tetris()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
@@ -841,11 +841,12 @@ function main(){
   }
 
   
-  window.location.replace('# |'+str+repeat("\u2800",width-str.length)+"|")
+  window.location.replace('# |'+str+repeat("\u2800",width-str.length)+"|"+beat)
 }
 
 function start(){
 
+  player.play()
   setInterval(main,1000/60);
 }
 
