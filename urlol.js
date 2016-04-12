@@ -408,20 +408,25 @@ function startrail(){
   return scroll("\uD83C\uDF1F==  *\u203E  ._")
 }
 
-greeted=["BLWARGH","WEARGHH","BLWORPS","ZWALGRS","HWALPRZ"]
+greeted=["1","2","3","Glench","5"]
 blocksv=["\u2581","\u2582","\u2583","\u2584","\u2585","\u2586","\u2587","\u2588"]
 blocksh=["\u2588","\u2589","\u258A","\u258B","\u258C","\u258D","\u258E","\u258F"]
 
 function greets(){
 
-  cursgreet=Math.floor(step/150)
-  cursstep=step%150
+  if (mark[0]==0){
+    initstep=step
+    mark[0]=1
+  }
 
-  document.title="greets to: "
+  cursgreet=Math.floor((step-initstep)/130)
+  cursstep=(step-initstep)%130
+
+  document.title="Greets go to:"
   string=""
   if (cursgreet<greeted.length) {
-    if      (cursstep<20) {string=repeat(blocksh[Math.floor(cursstep/2.9)],width)}
-    else if (cursstep>130) {string=repeat(blocksv[Math.floor((cursstep-130)/2.9)],width)}
+    if      (cursstep<15) {string=repeat(blocksh[Math.floor(cursstep/2.9)],width)}
+    else if (cursstep>115) {string=repeat(blocksv[Math.floor((cursstep-110)/2.9)],width)}
     else {string=bouncescroll(greeted[cursgreet],width)}
   }
   return string
@@ -435,7 +440,6 @@ function snakereset(){
   ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
   ]
   
-
   over=0
   pellet=[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]
   snek=[[Math.floor(Math.random()*4),Math.floor(Math.random()*40)]]
@@ -712,7 +716,7 @@ for (i=0; i<100; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length
 buildings=repeat(blocksv[0],10)+buildings+repeat(blocksv[0],10)
 function parallol(){
 
-  //document.title=scroll(scroll(cloudframes[beat%8]))
+  document.title=scroll(scroll(cloudframes[beat%8]))
   return scroll(buildings)
 }
 
@@ -821,7 +825,8 @@ lastbeat=beat
 laststep=step
 mark=[0]
 str=""
-init=0
+tinit=0
+ginit=0
 
 function main(){
 
@@ -833,7 +838,7 @@ function main(){
   // str=snake()
   // if (str=="Game Over") {mark[0]=0}
   //str=loading()
-  //str=greets()
+  str=greets()
   //str=train()
   //str=invaders()
   //str=dunnolol()
@@ -841,7 +846,7 @@ function main(){
   //str=merge(invaders(),equalizer())
   //str=parallol()
   //str=scroll(scroll(cloudframes[beat%8]))
-  str=tetris()
+  //str=tetris()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
@@ -866,10 +871,15 @@ function main(){
       if (str=="Game Over") {mark[0]=0}
     } 
 
-    else if (beat<72){
+    else if (beat<79){
       document.title="TET_ALT"
-      if (init==0){mark[0]=0; init=1}
+      if (tinit==0){mark[0]=0; tinit=1}
       str=tetris()
+    }
+
+    else if (beat<111){
+      if (ginit==0){mark[0]=0; ginit=1}
+      str=greets()
     }
 
     else {
