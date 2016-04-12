@@ -363,7 +363,7 @@ braile={
 function updateclock(){
 
   deltat=Date.now()-starttime
-  step=Math.floor(deltat/30)
+  step=Math.floor(deltat/35)
   beat=Math.floor(deltat/542)
 }
 
@@ -702,8 +702,8 @@ cloudframes=[
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
-["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
-["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF29","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
+["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF29","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF29","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ]
@@ -734,6 +734,7 @@ function tetrisreset(){
   ]
 
   over=0
+  lines=[0]
   piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
 }
 
@@ -770,7 +771,13 @@ function tetris(){
     piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
   }
 
-  // remove full lines
+  for (i=0; i<tetrisboard[0].length; i++){
+    if (tetrisboard[0][i]=="." && tetrisboard[1][i]=="." && tetrisboard[2][i]=="." && tetrisboard[3][i]=="."){
+      for (j=0; j<4; j++){
+        tetrisboard[j]=[""].concat(tetrisboard[j].slice(0,i).concat(tetrisboard[j].slice(i+1,tetrisboard[j].length-i)))
+      }
+    }
+  }
 
   for (i=0; i<tetrisboard.length; i++){
     for (j=0; j<tetrisboard[0].length; j++){
@@ -785,7 +792,7 @@ function tetris(){
     }
   }
 
-  return vscroll(tempboard,0)
+  return vscroll(tempboard,0)+"| [Lines:"+lines+"]"
 }
 
 function kitt(){
@@ -809,7 +816,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=0
+test=1
 lastbeat=beat
 laststep=step
 mark=[0]
@@ -823,7 +830,7 @@ function main(){
   //// TEST ZONE
   //str=meatballs()
   //str=logo()
-  // str=snake(mark[0])
+  // str=snake()
   // if (str=="Game Over") {mark[0]=0}
   //str=loading()
   //str=greets()
@@ -831,35 +838,43 @@ function main(){
   //str=invaders()
   //str=dunnolol()
   //str=startrail()
-  //str=colours()
   //str=merge(invaders(),equalizer())
   //str=parallol()
   //str=scroll(scroll(cloudframes[beat%8]))
-  //str=tetris()
+  str=tetris()
 
   //// SUPER SERIOUS ZONE
   if (test==0){
 
     if (beat<16){
+      document.title="INTRO_ALT"
       str="intro"
     }
 
     else if (beat<32){
+      document.title="EF1_ALT"
       str="ef1"
     }
 
     else if (beat<47){
+      document.title="EF2_ALT"
       str="ef2"
     }
 
     else if (beat<63){
-      str=snake(mark[0])
+      str=snake()
       if (str=="Game Over") {mark[0]=0}
     } 
 
-    else {
+    else if (beat<72){
+      document.title="TET_ALT"
       if (init==0){mark[0]=0; init=1}
       str=tetris()
+    }
+
+    else {
+      document.title="Dunno, lol"
+      str=dunnolol()
     }
   }
 
@@ -869,9 +884,11 @@ function main(){
 
 function start(){
 
-  player.play()
+  if (test==0){player.play()}
   setInterval(main,1000/60);
 }
+
+// add listener: start demo on play, reset on pause
 
 start()
 
