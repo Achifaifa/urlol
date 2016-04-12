@@ -820,7 +820,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 lastbeat=beat
 laststep=step
 mark=[0]
@@ -833,27 +833,45 @@ function main(){
   updateclock()
 
   //// TEST ZONE
-  //str=meatballs()
-  //str=logo()
-  // str=snake()
-  // if (str=="Game Over") {mark[0]=0}
-  //str=loading()
-  str=greets()
-  //str=train()
-  //str=invaders()
-  //str=dunnolol()
-  //str=startrail()
-  //str=merge(invaders(),equalizer())
-  //str=parallol()
-  //str=scroll(scroll(cloudframes[beat%8]))
-  //str=tetris()
+  if (test==1){
+
+    //str=meatballs()
+    //str=logo()
+    // str=snake()
+    // if (str=="Game Over") {mark[0]=0}
+    //str=loading()
+    //str=greets()
+    //str=train()
+    //str=invaders()
+    //str=dunnolol()
+    //str=startrail()
+    //str=merge(invaders(),equalizer())
+    //str=parallol()
+    //str=scroll(scroll(cloudframes[beat%8]))
+    //str=tetris()
+  }
 
   //// SUPER SERIOUS ZONE
-  if (test==0){
+  else if (test==0){
 
     if (beat<16){
-      document.title="INTRO_ALT"
-      str="intro"
+
+      if (beat<4){
+        document.title="<name>"
+        str="presents"
+      }
+      else if (beat<8){
+        document.title="With music by"
+        str="stage7"
+      }
+      else if (beat<12){
+        document.title="and code by"
+        str="achifaifa"
+      }
+      else {
+        document.title="URLOL"
+        str="AKA 'Brutal violations of HTTP RFCs"
+      }
     }
 
     else if (beat<32){
