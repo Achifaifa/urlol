@@ -644,7 +644,7 @@ function vscroll(grid,zero){
   if (zero==0){stp=0}
   else if (zero==1){stp=step}
   out=""
-  for (i=0; i<grid[0].length; i+=2){
+  for (i=0; i<grid[0].length-1; i+=2){
     temp=""
     if (grid[stp][i]=="."){temp+="1"}
     if (grid[stp+1][i]=="."){temp+="2"}
@@ -740,6 +740,7 @@ function tetrisreset(){
   over=0
   lines=[0]
   piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
+  nextpiece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
 }
 
 function tetris(){
@@ -748,6 +749,14 @@ function tetris(){
     tetrisreset()
     mark[0]=1
   }
+
+  piecebuffer=["    "].concat(nextpiece[0]).concat(["    "])
+  for (i=0; i<piecebuffer.length; i++){
+    piecebuffer[i]=repeat(" ",4-piecebuffer[i].length)+piecebuffer[i]
+  }
+  if(piecebuffer.length==3){piecebuffer=piecebuffer.concat(["    "])}
+
+  document.title="next ["+vscroll(piecebuffer, 0)+"]"
 
   if (piece[0][0][piece[0][0].length-1]=="." && tetrisboard[piece[2]][piece[1]+piece[0][0].length]=="."){
     tetrisreset()
@@ -772,7 +781,8 @@ function tetris(){
         }
       }
     }
-    piece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
+    piece=nextpiece
+    nextpiece=[tetrispieces[Math.floor(Math.random()*tetrispieces.length)],0,Math.floor(Math.random()*3)]
   }
 
   for (i=0; i<tetrisboard[0].length; i++){
@@ -780,6 +790,7 @@ function tetris(){
       for (j=0; j<4; j++){
         tetrisboard[j]=[""].concat(tetrisboard[j].slice(0,i).concat(tetrisboard[j].slice(i+1,tetrisboard[j].length-i)))
       }
+      lines[0]+=1
     }
   }
 
@@ -796,7 +807,7 @@ function tetris(){
     }
   }
 
-  return vscroll(tempboard,0)+"| [Lines:"+lines+"]"
+  return vscroll(tempboard,0)+"|  [Lines:"+lines+"]"
 }
 
 function kitt(){
@@ -820,7 +831,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=0
+test=1
 lastbeat=beat
 laststep=step
 mark=[0]
@@ -848,7 +859,7 @@ function main(){
     //str=merge(invaders(),equalizer())
     //str=parallol()
     //str=scroll(scroll(cloudframes[beat%8]))
-    //str=tetris()
+    str=tetris()
   }
 
   //// SUPER SERIOUS ZONE
@@ -890,7 +901,6 @@ function main(){
     } 
 
     else if (beat<79){
-      document.title="TET_ALT"
       if (tinit==0){mark[0]=0; tinit=1}
       str=tetris()
     }
@@ -901,7 +911,6 @@ function main(){
     }
 
     else {
-      document.title="Dunno, lol"
       str=dunnolol()
     }
   }
