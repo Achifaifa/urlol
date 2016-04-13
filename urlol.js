@@ -830,6 +830,7 @@ danceframes=[
 
 function danceparty(){
 
+  document.title="Dance! \uD83C\uDFB5"
   return scroll(danceframes[beat%8])
 }
 
@@ -844,7 +845,8 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=0
+test=1
+calibrate=0
 lastbeat=beat
 laststep=step
 mark=[0]
@@ -876,7 +878,14 @@ function main(){
     //str=scroll(scroll(cloudframes[beat%8]))
     //str=tetris()
     //str=kitt()
-    //str=danceparty()
+    str=danceparty()
+  }
+
+  // stuff to show while prepping the projection
+  else if (calibrate==1){
+
+    document.title="HEY THERE"
+    str="CAN YOU READ THIS?"
   }
 
   //// SUPER SERIOUS ZONE
@@ -898,13 +907,12 @@ function main(){
       }
       else {
         document.title="URLOL"
-        str="AKA 'Brutal violations of HTTP RFCs"
+        str="AKA 'Brutal violations of HTTP RFCs'"
       }
     }
 
     else if (beat<32){
       if (dinit==0){mark[0]=0; dinit=1}
-      document.title="Dance!"
       str=danceparty()
     }
 
@@ -934,12 +942,12 @@ function main(){
     }
   }
 
-  window.location.replace('# |'+str+repeat("\u2800",width-str.length)+"|"+beat)
+  window.location.replace('#  '+str+repeat("\u2800",width-str.length)+"|"+beat)
 }
 
 function start(){
 
-  if (test==0){player.play()}
+  if (test==0 && calibrate==0){player.play()}
   setInterval(main,1000/60);
 }
 
