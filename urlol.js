@@ -364,7 +364,7 @@ function updateclock(){
 
   deltat=Date.now()-starttime
   step=Math.floor(deltat/35)
-  beat=Math.floor(deltat/542)
+  beat=Math.floor(deltat/532)
 }
 
 // Seriously JS? No str/arr multiplication? SERIOUSLY?
@@ -408,7 +408,7 @@ function startrail(){
   return scroll("\uD83C\uDF1F==  *\u203E  ._")
 }
 
-greeted=["1","2","3","Glench","5"]
+greeted=["Collapse","Bizo","Metro/SOGA","Glench","Freesoft && Scene ORGs", "software failure", "purples studios"]
 blocksv=["\u2581","\u2582","\u2583","\u2584","\u2585","\u2586","\u2587","\u2588"]
 blocksh=["\u2588","\u2589","\u258A","\u258B","\u258C","\u258D","\u258E","\u258F"]
 
@@ -845,7 +845,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 calibrate=0
 lastbeat=beat
 laststep=step
@@ -898,15 +898,15 @@ function main(){
         str="presents"
       }
       else if (beat<8){
-        document.title="With music by"
+        document.title="\uD83C\uDFBC With music by"
         str="stage7"
       }
       else if (beat<12){
-        document.title="and code by"
+        document.title="\uD83D\uDCBE And code by"
         str="achifaifa"
       }
       else {
-        document.title="URLOL"
+        document.title="\u2800\u2800URLOL"
         str="AKA 'Brutal violations of HTTP RFCs'"
       }
     }
