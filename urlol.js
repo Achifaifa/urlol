@@ -522,7 +522,9 @@ function snake(){
 
 function scroll(text){
 
-  len=width-(Math.floor(step/3))
+  if (mark[0]==0){fstep=step; mark[0]=1}
+
+  len=width-(Math.floor((step-fstep)/4))
   string=""
   for (i=0; i<width; i++){
     if (i<len){string=string+"\u2800"}
@@ -812,12 +814,23 @@ function tetris(){
 
 function kitt(){
 
-  ;
+  return bouncescroll("\u2B1B", 5)
 }
+
+danceframes=[
+"   \u30FD(\uFF65\u03C9\uFF65\u309E)",
+"     (\uFF62\uFF65\u03C9\uFF65)\uFF62",
+"    \u2514(\uFF3E\u03C9\uFF3E)\u309E",
+"     (~\u203E\u2323\u203E)~",
+"    ~(\u203E\u2323\u203E~)",
+" \u208D\u208D \u25DD(\u30FB\u03C9\u30FB)\u25DF \u207E\u207E",
+"    \u01AA(\u203E.\u203E\u201C)\u2510",
+"    \u250C(\u02D8\u2323\u02D8)\u0283"
+]
 
 function danceparty(){
 
-  ;
+  return scroll(danceframes[beat%8])
 }
 
 function pong(){
@@ -831,13 +844,15 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 lastbeat=beat
 laststep=step
 mark=[0]
 str=""
 tinit=0
 ginit=0
+dinit=0
+sinit=0
 
 function main(){
 
@@ -859,7 +874,9 @@ function main(){
     //str=merge(invaders(),equalizer())
     //str=parallol()
     //str=scroll(scroll(cloudframes[beat%8]))
-    str=tetris()
+    //str=tetris()
+    //str=kitt()
+    //str=danceparty()
   }
 
   //// SUPER SERIOUS ZONE
@@ -886,8 +903,9 @@ function main(){
     }
 
     else if (beat<32){
-      document.title="EF1_ALT"
-      str="ef1"
+      if (dinit==0){mark[0]=0; dinit=1}
+      document.title="Dance!"
+      str=danceparty()
     }
 
     else if (beat<47){
@@ -896,6 +914,7 @@ function main(){
     }
 
     else if (beat<63){
+      if (sinit==0){mark[0]=0; sinit=1}
       str=snake()
       if (str=="Game Over") {mark[0]=0}
     } 
@@ -915,7 +934,6 @@ function main(){
     }
   }
 
-  
   window.location.replace('# |'+str+repeat("\u2800",width-str.length)+"|"+beat)
 }
 
