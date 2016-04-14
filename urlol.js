@@ -407,8 +407,8 @@ function startrail(){
 
   return scroll("\uD83C\uDF1F==  *\u203E  ._")
 }
-
-greeted=["Collapse","Bizo","Metro/SOGA","Glench","Freesoft && Scene ORGs", "software failure", "purples studios"]
+//sfl--
+greeted=["Collapse","Bixo","Metro/SOGA","Glench","Euskal #emoscene", "Software Failure", "Purples studios"]
 blocksv=["\u2581","\u2582","\u2583","\u2584","\u2585","\u2586","\u2587","\u2588"]
 blocksh=["\u2588","\u2589","\u258A","\u258B","\u258C","\u258D","\u258E","\u258F"]
 
@@ -865,8 +865,8 @@ function main(){
 
     //str=meatballs()
     //str=logo()
-    // str=snake()
-    // if (str=="Game Over") {mark[0]=0}
+    str=snake()
+    if (str=="Game Over") {mark[0]=0}
     //str=loading()
     //str=greets()
     //str=train()
@@ -878,7 +878,7 @@ function main(){
     //str=scroll(scroll(cloudframes[beat%8]))
     //str=tetris()
     //str=kitt()
-    str=danceparty()
+    //str=danceparty()
   }
 
   // stuff to show while prepping the projection
@@ -916,12 +916,12 @@ function main(){
       str=danceparty()
     }
 
-    else if (beat<47){
+    else if (beat<48){
       document.title="EF2_ALT"
       str="ef2"
     }
 
-    else if (beat<63){
+    else if (beat<64){
       if (sinit==0){mark[0]=0; sinit=1}
       str=snake()
       if (str=="Game Over") {mark[0]=0}
@@ -932,9 +932,34 @@ function main(){
       str=tetris()
     }
 
-    else if (beat<111){
+    else if (beat<127){
       if (ginit==0){mark[0]=0; ginit=1}
       str=greets()
+    }
+
+    else if (beat<145){
+
+      str="images"
+    }
+
+    else if (beat<161){
+
+      str=meatballs()
+    }
+
+    else if (beat<177){
+
+      str="EF5"
+    }
+
+    else if (beat<189){
+
+      str="EF6"
+    }
+
+    else if (beat<204){
+
+      str="outro"
     }
 
     else {
