@@ -1024,7 +1024,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 calibrate=0
 lastbeat=beat
 laststep=step
@@ -1068,8 +1068,8 @@ function main(){
     if (beat<16){
 
       if (beat<4){
-        document.title="<name>"
-        str="presents"
+        document.title="PKT Team & Genshiken"
+        str="present"
       }
       else if (beat<8){
         document.title="\uD83C\uDFBC With music by"
@@ -1123,7 +1123,7 @@ function main(){
 
     else if (beat<161){
 
-      str="aa"
+      str=startrail()
     }
 
     else if (beat<177){
@@ -1134,6 +1134,16 @@ function main(){
     else if (beat<189){
 
       str="EF6"
+    }
+
+    else if (beat<193){
+
+      str="EF7"
+    }
+
+    else if (beat<196){
+
+      str="EF8"
     }
 
     else if (beat<204){
