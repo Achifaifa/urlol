@@ -843,6 +843,7 @@ function vscroll(grid,zero){
 
 function logo(){
 
+  document.title=scroll("Using the rest of the browser is too easy")
   return vscroll(ek,1)
 }
 
@@ -1036,7 +1037,6 @@ ginit=0
 dinit=0
 sinit=0
 iinit=0
-stinit=0
 
 function main(){
 
@@ -1120,8 +1120,8 @@ function main(){
 
     else if (beat<161){
 
-      if (stinit==0){mark[0]=0; stinit=1}
-      str=startrail()
+      document.title=""
+      str="J/K, lol"
     }
 
     else if (beat<177){
