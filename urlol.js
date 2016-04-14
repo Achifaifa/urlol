@@ -642,9 +642,14 @@ function meatballs(){
 
 function vscroll(grid,zero){
 
-  if (step+3>=grid.length && zero==1){return ""}
+  if (mark[0]==0){
+    fstep=step
+    mark[0]=1
+  }
+
+  if (step-fstep+3>=grid.length && zero==1){return ""}
   if (zero==0){stp=0}
-  else if (zero==1){stp=step}
+  else if (zero==1){stp=step-fstep}
   out=""
   for (i=0; i<grid[0].length-1; i+=2){
     temp=""
@@ -669,7 +674,7 @@ function logo(){
 
 function gelogo(){
   
-  document.title=""
+  document.title="For the awesome people at"
   return bouncescroll("\uD83D\uDE4C \uD83D\uDE4C \uD83D\uDE4C Gipuzkoa Encounter 10",width)
 }
 
@@ -855,6 +860,7 @@ tinit=0
 ginit=0
 dinit=0
 sinit=0
+iinit=0
 
 function main(){
 
@@ -917,8 +923,7 @@ function main(){
     }
 
     else if (beat<48){
-      document.title="EF2_ALT"
-      str="ef2"
+      str=gelogo()
     }
 
     else if (beat<64){
@@ -927,24 +932,30 @@ function main(){
       if (str=="Game Over") {mark[0]=0}
     } 
 
-    else if (beat<79){
+    else if (beat<80){
       if (tinit==0){mark[0]=0; tinit=1}
       str=tetris()
     }
 
-    else if (beat<127){
+    else if (beat<128){
       if (ginit==0){mark[0]=0; ginit=1}
       str=greets()
     }
 
-    else if (beat<145){
+    else if (beat<144){
 
-      str="images"
+      if (iinit==0){mark[0]=0; iinit=1}
+      str=logo()
+    }
+
+    else if (beat<159){
+
+      str=meatballs()
     }
 
     else if (beat<161){
 
-      str=meatballs()
+      str="aa"
     }
 
     else if (beat<177){
