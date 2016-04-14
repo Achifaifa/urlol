@@ -1024,6 +1024,7 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
+ids={"mainloop":0, "fakeload":0}
 test=0
 calibrate=0
 lastbeat=beat
@@ -1035,6 +1036,7 @@ ginit=0
 dinit=0
 sinit=0
 iinit=0
+stinit=0
 
 function main(){
 
@@ -1044,15 +1046,10 @@ function main(){
   if (test==1){
 
     str=logo()
-    //str=loading()
     //str=train()
-    //str=invaders()
-    //str=startrail()
-    //str=merge(invaders(),equalizer())
     //str=parallol()
     //str=scroll(scroll(cloudframes[beat%8]))
     //str=kitt()
-    //str=danceparty()
   }
 
   // stuff to show while prepping the projection
@@ -1123,6 +1120,7 @@ function main(){
 
     else if (beat<161){
 
+      if (stinit==0){mark[0]=0; stinit=1}
       str=startrail()
     }
 
@@ -1161,13 +1159,29 @@ function main(){
 
 function start(){
 
+  player.removeEventListener('play',start)
+  player.addEventListener('pause', fakeload);
+  starttime=Date.now()
+  clearInterval(ids["fakeload"])
   if (test==0 && calibrate==0){player.play()}
-  setInterval(main,1000/60);
+  ids["mainloop"]=setInterval(main,1000/60);
 }
 
-// add listener: start demo on play, reset on pause
+function fakeload(){
 
-start()
+  player.addEventListener('play', start);
+  player.removeEventListener("pause",fakeload)
+  clearInterval(ids["mainloop"])
+  ids["fakeload"]=setInterval(loadanim,1000/60)
+}
+
+function loadanim(){
+
+  updateclock()
+  window.location.replace("# "+loading())
+}
+
+fakeload()
 
 
 /////////////////////////////////////////////////////////
