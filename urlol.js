@@ -1150,6 +1150,7 @@ function main(){
     }
 
     else {
+      player.removeEventListener('pause', fakeload)
       str=dunnolol()
     }
   }
@@ -1171,6 +1172,7 @@ function fakeload(){
 
   player.addEventListener('play', start);
   player.removeEventListener("pause",fakeload)
+  player.load()
   clearInterval(ids["mainloop"])
   ids["fakeload"]=setInterval(loadanim,1000/60)
 }
