@@ -1046,19 +1046,21 @@ function spaceshit(){
     if (beat%3==0){space=[zombie].concat(space)}
     else {space=[" "].concat(space)}
 
-    if (space[space.length-1]==zombie){;}
-    space=space.slice(0,space.length-1)
-
     for (i=0; i<space.length; i++){
 
-      if (space[i]==zombie && space[i-1]=="-")  {space[i]=fire; space[i-1]=" "}
-      else if (space[i]==fire)                       {space[i]=skull}
-      else if (space[i]==skull)                      {space[i]=" "}
+      if (space[i]==zombie && space[i+1]=="-")    {space[i]=fire; space[i+1]=" "}
+      else if (space[i]==fire)                    {space[i]=skull}
+      else if (space[i]==skull)                   {space[i]=" "}
+      else if (space[i]=="-")  {space[i-2]="-"; space[i]=" "}
     }
 
+    space=space.slice(0,space.length-1)
+    if (beat%5==0 && space[space.length-1]==" "){space[space.length-1]="-"}
+    
     lastbeat=beat
   }
 
+  if (space[space.length-1]==zombie){return "Game Over"}
   return space.join("")+ship
 }
 
