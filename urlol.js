@@ -1061,7 +1061,7 @@ function spaceshit(){
   }
 
   if (space[space.length-1]==zombie){return "Game Over"}
-  return space.join("")+ship
+  else {return space.join("")+ship}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -1091,6 +1091,7 @@ function main(){
   if (test==1){
 
     str=spaceshit()
+    if (str=="Game Over"){mark[0]=0}
     //str=pong()
     //str=train()
     //str=parallol()
@@ -1171,8 +1172,8 @@ function main(){
 
     else if (beat<189){
 
-      document.title="ef6_alt"
-      str="EF6"
+      str=spaceshit()
+      if (str="Game Over"){mark[0]=0}
     }
 
     else if (beat<193){
