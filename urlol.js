@@ -1042,23 +1042,25 @@ function spaceshit(){
 
   document.title="pew pew pew"
 
+  space=[" "].concat(space)
   if (lastbeat!=beat){
     if (beat%3==0){space=[zombie].concat(space)}
-    else {space=[" "].concat(space)}
 
-    for (i=0; i<space.length; i++){
-
-      if (space[i]==zombie && space[i+1]=="-")    {space[i]=fire; space[i+1]=" "}
-      else if (space[i]==fire)                    {space[i]=skull}
-      else if (space[i]==skull)                   {space[i]=" "}
-      else if (space[i]=="-")  {space[i-2]="-"; space[i]=" "}
-    }
-
-    space=space.slice(0,space.length-1)
     if (beat%5==0 && space[space.length-1]==" "){space[space.length-1]="-"}
     
     lastbeat=beat
   }
+
+  for (i=0; i<space.length; i++){
+
+      if (space[i]==zombie && space[i+1]=="-")    {space[i]=fire; space[i+1]=" "}
+      else if (space[i]==fire)                    {space[i]=skull}
+      else if (space[i]==skull)                   {space[i]=" "}
+      else if (space[i]=="-")                     {space[i-2]="-"; space[i]=" "}
+    }
+
+  space=space.slice(0,space.length-1)
+  if (Math.random()<0.02 && space[space.length-1]==" "){space[space.length-1]="-"}
 
   if (space[space.length-1]==zombie){return "Game Over"}
   else {return space.join("")+ship}
@@ -1070,7 +1072,7 @@ function spaceshit(){
 //window.location.replace('#'+str)
 //document.title=str
 
-test=1
+test=0
 ids={"mainloop":0, "fakeload":0}
 calibrate=0
 lastbeat=beat
@@ -1082,6 +1084,7 @@ ginit=0
 dinit=0
 sinit=0
 iinit=0
+spinit=0
 
 function main(){
 
@@ -1090,13 +1093,12 @@ function main(){
   //// TEST ZONE
   if (test==1){
 
-    str=spaceshit()
-    if (str=="Game Over"){mark[0]=0}
     //str=pong()
     //str=train()
     //str=parallol()
     //str=scroll(scroll(cloudframes[beat%8]))
     //str=kitt()
+    str=spaceshit()
   }
 
   //// SUPER SERIOUS ZONE
@@ -1161,7 +1163,7 @@ function main(){
 
     else if (beat<161){
 
-      document.title=""
+      document.title="\u2800"
       str="JK, lol"
     }
 
@@ -1172,8 +1174,9 @@ function main(){
 
     else if (beat<189){
 
+      if (spinit==0){mark[0]=0; spinit=1}
       str=spaceshit()
-      if (str="Game Over"){mark[0]=0}
+      if (str=="Game Over"){mark[0]=0}
     }
 
     else if (beat<193){
