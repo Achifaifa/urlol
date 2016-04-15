@@ -581,8 +581,9 @@ function startrail(){
 
   return scroll("\uD83C\uDF1F==  *\u203E  ._")
 }
-//sfl--
-greeted=["Collapse","Bixo","Metro/SOGA","Glench","Euskal #emoscene", "Software Failure", "Purples studios"]
+
+// The "emoscene" thing is an inside joke
+greeted=["Collapse && Purples studios","Bixo","Metro/SOGA","Glench","Euskal #emoscene", "Software Failure"]
 blocksv=["\u2581","\u2582","\u2583","\u2584","\u2585","\u2586","\u2587","\u2588"]
 blocksh=["\u2588","\u2589","\u258A","\u258B","\u258C","\u258D","\u258E","\u258F"]
 
@@ -894,11 +895,11 @@ cloudframes=[
 ["\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF29","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28","\uD83C\uDF28"],
 ]
 buildings=""
-for (i=0; i<100; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length)]}
-buildings=repeat(blocksv[0],10)+buildings+repeat(blocksv[0],10)
+for (i=0; i<30; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length)]}
+buildings=repeat(blocksv[0],5)+buildings+repeat(blocksv[0],10)
 function parallol(){
 
-  document.title=scroll(scroll(cloudframes[beat%8]))
+  document.title=scroll(cloudframes[beat%8])
   return scroll(buildings)
 }
 
@@ -1014,9 +1015,51 @@ function danceparty(){
   return scroll(danceframes[beat%8])
 }
 
+balls=['\u00B8', '.', '\u00B7', '\u00B4', '`', '\u00B7', '.']
 function pong(){
 
-  ;
+  document.title="\u2800\uD83C\uDFBE"
+  return bouncescroll(balls[Math.floor(step/2)%7], 20)
+}
+
+ship="\uD83D\uDE80"
+zombie="\uD83D\uDC74"
+fire="\uD83D\uDD25"
+skull="\uD83D\uDC80"
+
+function spacereset(){
+
+  space=[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+  lastbeat=beat
+}
+
+function spaceshit(){
+
+  if (mark[0]==0){
+    spacereset()
+    mark[0]=1
+  }
+
+  document.title="pew pew pew"
+
+  if (lastbeat!=beat){
+    if (beat%3==0){space=[zombie].concat(space)}
+    else {space=[" "].concat(space)}
+
+    if (space[space.length-1]==zombie){;}
+    space=space.slice(0,space.length-1)
+
+    for (i=0; i<space.length; i++){
+
+      if (space[i]==zombie && space[i-1]=="-")  {space[i]=fire; space[i-1]=" "}
+      else if (space[i]==fire)                       {space[i]=skull}
+      else if (space[i]==skull)                      {space[i]=" "}
+    }
+
+    lastbeat=beat
+  }
+
+  return space.join("")+ship
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -1025,8 +1068,8 @@ function pong(){
 //window.location.replace('#'+str)
 //document.title=str
 
+test=1
 ids={"mainloop":0, "fakeload":0}
-test=0
 calibrate=0
 lastbeat=beat
 laststep=step
@@ -1045,18 +1088,12 @@ function main(){
   //// TEST ZONE
   if (test==1){
 
-    str=logo()
+    str=spaceshit()
+    //str=pong()
     //str=train()
     //str=parallol()
     //str=scroll(scroll(cloudframes[beat%8]))
     //str=kitt()
-  }
-
-  // stuff to show while prepping the projection
-  else if (calibrate==1){
-
-    document.title="HEY THERE"
-    str="CAN YOU READ THIS?"
   }
 
   //// SUPER SERIOUS ZONE
@@ -1088,6 +1125,7 @@ function main(){
     }
 
     else if (beat<48){
+      document.title=""
       str=merge(invaders(),equalizer())
     }
 
@@ -1121,27 +1159,30 @@ function main(){
     else if (beat<161){
 
       document.title=""
-      str="J/K, lol"
+      str="JK, lol"
     }
 
     else if (beat<177){
 
-      str="EF5"
+      str=pong()
     }
 
     else if (beat<189){
 
+      document.title="ef6_alt"
       str="EF6"
     }
 
     else if (beat<193){
 
-      str="EF7"
+      document.title="ef7_alt"
+      str="EF7(m1)"
     }
 
     else if (beat<196){
 
-      str="EF8"
+      document.title="ef8_alt"
+      str="EF8(m2)"
     }
 
     else if (beat<204){
@@ -1164,7 +1205,6 @@ function start(){
   player.addEventListener('pause', fakeload);
   starttime=Date.now()
   clearInterval(ids["fakeload"])
-  if (test==0 && calibrate==0){player.play()}
   ids["mainloop"]=setInterval(main,1000/60);
 }
 
@@ -1183,8 +1223,12 @@ function loadanim(){
   window.location.replace("# "+loading())
 }
 
-fakeload()
+if (calibrate==1){
 
+  document.title="HEY THERE"
+  window.location.replace('# CAN YOU READ THIS?')
+}
+else {fakeload()}
 
 /////////////////////////////////////////////////////////
 /////////copypaste from example3.html for the eq/////////
