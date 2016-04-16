@@ -17,4 +17,4 @@ This demo takes the idea from [@Glench's site](http://glench.com/hash/) a bit fu
 
 #### Known issues:
 
-* When loading the page for the first time it works just fine, but when pausing/replaying or reloading the page the sound may not work. Apparently a wrong HTML formatting fixed the issue? ¯\_(ツ)_/¯
+* When loading the page for the first time it works just fine, but when pausing/replaying or reloading the page the sound may not work. Apparently a wrong HTML formatting fixed the issue but it may not load the sound at times. ¯\\_(ツ)_/¯
