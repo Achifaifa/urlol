@@ -1203,7 +1203,7 @@ function main(){
     }
   }
 
-  window.location.replace('#  '+str+repeat("\u2800",width-str.length)+"|"+beat)
+  window.location.replace('#  '+str+repeat("\u2800",width-str.length))
 }
 
 function start(){
