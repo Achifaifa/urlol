@@ -3,6 +3,9 @@
 
 Done for the GE10 Wild Compo.
 
+Code by Achifaifa (achi [at] hush [dot] ai)
+Music by Stage7 (stage7 [at] stg7 [dot] net)
+
 #### General idea
 
 This demo takes the idea from [@Glench's site](http://glench.com/hash/) and takes it a bit further.
