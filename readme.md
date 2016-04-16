@@ -8,7 +8,7 @@ Music by Stage7 (stage7 [at] stg7 [dot] net)
 
 #### General idea
 
-This demo takes the idea from [@Glench's site](http://glench.com/hash/) and takes it a bit further.
+This demo takes the idea from [@Glench's site](http://glench.com/hash/) a bit further.
 
 #### Playing:
 
@@ -17,4 +17,4 @@ This demo takes the idea from [@Glench's site](http://glench.com/hash/) and take
 
 #### Known issues:
 
-* When loading the page for the first time it works just fine, but when pausing/replaying or reloading the page the sound does not work. Working on it.
+* When loading the page for the first time it works just fine, but when pausing/replaying or reloading the page the sound may not work. Apparently a wrong HTML formatting fixed the issue? ¯\_(ツ)_/¯
