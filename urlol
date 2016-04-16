@@ -1,5 +1,6 @@
 <title>urlol</title>
-<audio id="player" controls="controls">
-  <source src="urlol.mp3" type="audio/mpeg">
+<audio  id="player" preload="none" controls><
+<source src="./urlol.mp3">
+<source src="./urlol.ogg">
 </audio>
 <script src="./urlol.js"></script>
