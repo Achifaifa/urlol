@@ -857,9 +857,9 @@ function gelogo(){
 function train(){
 
   document.title="Choo choo!"
-  return scroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
+  return bouncescroll(["\uD83D\uDE84","\uD83D\uDE9D","\uD83D\uDE9D",
   "\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D","\uD83D\uDE9D",
-  "\uD83D\uDE9D",])
+  "\uD83D\uDE9D",],40)
 }
 
 // Uses blocksv for vertical bars
@@ -899,8 +899,8 @@ for (i=0; i<30; i++){buildings+=blocksv[Math.floor(Math.random()*blocksv.length)
 buildings=repeat(blocksv[0],5)+buildings+repeat(blocksv[0],10)
 function parallol(){
 
-  document.title=scroll(cloudframes[beat%8])
-  return scroll(buildings)
+  document.title=bouncescroll(cloudframes[beat%8],30)
+  return bouncescroll(buildings,30)
 }
 
 tetrispieces=[["..",".."],["..."," . "],[".  ","..."],["  .","..."],[".. "," .."],[" ..",".. "],["...."]]
@@ -1033,6 +1033,12 @@ function spacereset(){
   lastbeat=beat
 }
 
+cars=["\uD83C\uDFCE", "\u2800", "\u2800", "\uD83C\uDFCE", "\uD83C\uDFCE", "\u2800", "\u2800", "\uD83D\uDE93"]
+function chase(){
+
+  return bouncescroll(cars, 35)
+}
+
 function spaceshit(){
 
   if (mark[0]==0){
@@ -1073,8 +1079,8 @@ function spaceshit(){
 //document.title=str
 
 test=0
-ids={"mainloop":0, "fakeload":0}
 calibrate=0
+ids={"mainloop":0, "fakeload":0}
 lastbeat=beat
 laststep=step
 mark=[0]
@@ -1093,12 +1099,7 @@ function main(){
   //// TEST ZONE
   if (test==1){
 
-    //str=pong()
-    //str=train()
-    //str=parallol()
-    //str=scroll(scroll(cloudframes[beat%8]))
-    //str=kitt()
-    str=spaceshit()
+    str=chase()
   }
 
   //// SUPER SERIOUS ZONE
@@ -1119,7 +1120,7 @@ function main(){
         str="achifaifa"
       }
       else {
-        document.title="\u2800\u2800URLOL"
+        document.title="\u2800\u2800\u2800URLOL"
         str="AKA 'Brutal violations of HTTP RFCs'"
       }
     }
@@ -1130,7 +1131,7 @@ function main(){
     }
 
     else if (beat<48){
-      document.title=""
+      document.title="\u2800"
       str=merge(invaders(),equalizer())
     }
 
@@ -1158,7 +1159,7 @@ function main(){
 
     else if (beat<159){
 
-      str=meatballs()
+      str=pong()
     }
 
     else if (beat<161){
@@ -1169,7 +1170,7 @@ function main(){
 
     else if (beat<177){
 
-      str=pong()
+      str=meatballs()
     }
 
     else if (beat<189){
@@ -1181,14 +1182,14 @@ function main(){
 
     else if (beat<193){
 
-      document.title="ef7_alt"
-      str="EF7(m1)"
+      document.title="\u2800\u2800\u73FE\u8996\u7814"
+      str="Genshiken"
     }
 
     else if (beat<196){
 
-      document.title="ef8_alt"
-      str="EF8(m2)"
+      document.title="\u2800\u2800\uD83C\uDDF5\uD83C\uDDF0\uD83C\uDDF9"
+      str="\u2800\u2800PKT Team"
     }
 
     else if (beat<204){
@@ -1216,9 +1217,9 @@ function start(){
 
 function fakeload(){
 
+  player.load()
   player.addEventListener('play', start);
   player.removeEventListener("pause",fakeload)
-  player.load()
   clearInterval(ids["mainloop"])
   ids["fakeload"]=setInterval(loadanim,1000/60)
 }
@@ -1234,7 +1235,7 @@ if (calibrate==1){
   document.title="HEY THERE"
   window.location.replace('# CAN YOU READ THIS?')
 }
-else {fakeload()}
+else {player.load(); fakeload()}
 
 /////////////////////////////////////////////////////////
 /////////copypaste from example3.html for the eq/////////
