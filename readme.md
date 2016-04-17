@@ -3,7 +3,10 @@
 
 Done for the GE10 Wild Compo.
 
-Code by Achifaifa (achi [at] hush [dot] ai)
+2nd place in 'Most technical' Wild compo
+2nd place in 'Most creative' Wild compo
+
+Code by Achifaifa (achi [at] hush [dot] ai)  
 Music by Stage7 (stage7 [at] stg7 [dot] net)
 
 #### General idea
