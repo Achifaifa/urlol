@@ -3,7 +3,10 @@
 
 Done for the GE10 Wild Compo.
 
-2nd place in 'Most technical' Wild compo
+[Pouet](http://www.pouet.net/prod.php?which=67248)  
+[Live](http://achi.se/projects/software/demos/urlol)
+
+2nd place in 'Most technical' Wild compo  
 2nd place in 'Most creative' Wild compo
 
 Code by Achifaifa (achi [at] hush [dot] ai)  
